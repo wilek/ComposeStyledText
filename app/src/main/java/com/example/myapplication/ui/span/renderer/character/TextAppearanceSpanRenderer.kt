@@ -10,8 +10,9 @@ import com.example.myapplication.ui.util.toColor
 import com.example.myapplication.ui.util.toPx
 import com.example.myapplication.ui.util.toStyle
 
-open class TextAppearanceSpanRenderer : SpanRenderer<TextAppearance> {
-    override fun renderSpan(context: Context, styleSpan: TextAppearance): Any {
+open class TextAppearanceSpanRenderer(private val context: Context) : SpanRenderer<TextAppearance> {
+
+    override fun renderSpan(styleSpan: TextAppearance): Any {
         return when (val type = styleSpan.type) {
             is TextAppearanceType.FromResources -> TextAppearanceSpan(context, type.appearanceResId, type.colorListResId)
             is TextAppearanceType.FromSpecified -> type.toTextAppearanceSpanFromSpecified(context = context)

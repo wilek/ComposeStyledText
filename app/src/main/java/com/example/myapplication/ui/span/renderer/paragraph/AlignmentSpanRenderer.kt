@@ -1,6 +1,5 @@
 package com.example.myapplication.ui.span.renderer.paragraph
 
-import android.content.Context
 import android.text.Layout
 import android.text.style.AlignmentSpan
 import com.example.myapplication.ui.span.renderer.SpanRenderer
@@ -9,7 +8,7 @@ import com.example.myapplication.ui.string.combine.TextCombine.TextAlignmentType
 
 open class AlignmentSpanRenderer : SpanRenderer<Alignment> {
 
-    override fun renderSpan(context: Context, styleSpan: Alignment): Any {
+    override fun renderSpan(styleSpan: Alignment): Any {
         return AlignmentSpan.Standard(styleSpan.alignment.toAlignment())
     }
 

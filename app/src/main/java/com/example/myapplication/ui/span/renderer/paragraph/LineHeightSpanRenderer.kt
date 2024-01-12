@@ -8,9 +8,9 @@ import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.Paragra
 import com.example.myapplication.ui.util.toPx
 import kotlin.math.roundToInt
 
-open class LineHeightSpanRenderer : SpanRenderer<LineHeight> {
+open class LineHeightSpanRenderer(private val context: Context) : SpanRenderer<LineHeight> {
 
-    override fun renderSpan(context: Context, styleSpan: LineHeight): Any {
+    override fun renderSpan(styleSpan: LineHeight): Any {
         return LineHeightSpan(height = styleSpan.height.toPx(context = context))
     }
 

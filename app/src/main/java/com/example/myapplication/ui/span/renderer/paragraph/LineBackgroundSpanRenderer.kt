@@ -9,9 +9,9 @@ import com.example.myapplication.ui.span.renderer.SpanRenderer
 import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.ParagraphStyle.LineBackground
 import com.example.myapplication.ui.util.toColor
 
-open class LineBackgroundSpanRenderer : SpanRenderer<LineBackground> {
+open class LineBackgroundSpanRenderer(private val context: Context) : SpanRenderer<LineBackground> {
 
-    override fun renderSpan(context: Context, styleSpan: LineBackground): Any {
+    override fun renderSpan(styleSpan: LineBackground): Any {
         return LineBackgroundSpan(styleSpan.color.toColor(context = context))
     }
 

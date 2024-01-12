@@ -11,8 +11,9 @@ import com.example.myapplication.ui.string.combine.TextCombine.ImageAlignType
 import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.CharacterStyle.Image
 import com.example.myapplication.ui.util.toImage
 
-open class ImageSpanRenderer : SpanRenderer<Image> {
-    override fun renderSpan(context: Context, styleSpan: Image): Any {
+open class ImageSpanRenderer(private val context: Context) : SpanRenderer<Image> {
+
+    override fun renderSpan(styleSpan: Image): Any {
         return ImageSpan(
             drawable = styleSpan.image.toImage(context = context, size = styleSpan.size, margin = styleSpan.margin),
             alignment = styleSpan.alignType

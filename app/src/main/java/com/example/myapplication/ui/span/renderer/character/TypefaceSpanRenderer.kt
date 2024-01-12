@@ -10,8 +10,9 @@ import com.example.myapplication.ui.span.renderer.SpanRenderer
 import com.example.myapplication.ui.string.combine.TextCombine.TypefaceSource
 import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.CharacterStyle.Typeface
 
-open class TypefaceSpanRenderer : SpanRenderer<Typeface> {
-    override fun renderSpan(context: Context, styleSpan: Typeface): Any {
+open class TypefaceSpanRenderer(private val context: Context) : SpanRenderer<Typeface> {
+
+    override fun renderSpan(styleSpan: Typeface): Any {
         return when (val typeface = styleSpan.typeface) {
             is TypefaceSource.FromAssets -> TypefaceSpan(typeface = context.getFontFromAsset(fileName = typeface.fileName))
             is TypefaceSource.FromFamilyName -> FamilyNameTypefaceSpan(familyName = typeface.familyName)

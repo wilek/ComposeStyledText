@@ -32,9 +32,9 @@ import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.Paragra
 import com.example.myapplication.ui.util.toColor
 import com.example.myapplication.ui.util.toPx
 
-open class BulletSpanRenderer : SpanRenderer<Bullet> {
+open class BulletSpanRenderer(private val context: Context) : SpanRenderer<Bullet> {
 
-    override fun renderSpan(context: Context, styleSpan: Bullet): Any {
+    override fun renderSpan(styleSpan: Bullet): Any {
         return BulletPointSpan(
             gapWidth = styleSpan.gapWidth?.toPx(context = context) ?: DEFAULT_GAP_WIDTH,
             bulletRadius = styleSpan.radius?.toPx(context = context) ?: DEFAULT_BULLET_RADIUS,

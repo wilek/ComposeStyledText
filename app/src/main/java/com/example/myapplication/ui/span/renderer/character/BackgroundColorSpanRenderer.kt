@@ -6,8 +6,8 @@ import com.example.myapplication.ui.span.renderer.SpanRenderer
 import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.CharacterStyle.BackgroundColor
 import com.example.myapplication.ui.util.toColor
 
-open class BackgroundColorSpanRenderer : SpanRenderer<BackgroundColor> {
-    override fun renderSpan(context: Context, styleSpan: BackgroundColor): Any {
+open class BackgroundColorSpanRenderer(private val context: Context) : SpanRenderer<BackgroundColor> {
+    override fun renderSpan(styleSpan: BackgroundColor): Any {
         return BackgroundColorSpan(styleSpan.color.toColor(context = context))
     }
 }

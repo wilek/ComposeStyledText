@@ -13,9 +13,9 @@ import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.Paragra
 import com.example.myapplication.ui.util.toColor
 import com.example.myapplication.ui.util.toPx
 
-open class QuoteSpanRenderer : SpanRenderer<Quote> {
+open class QuoteSpanRenderer(private val context: Context) : SpanRenderer<Quote> {
 
-    override fun renderSpan(context: Context, styleSpan: Quote): Any {
+    override fun renderSpan(styleSpan: Quote): Any {
         return QuoteSpan(
             gapWidth = styleSpan.gapWidth?.toPx(context = context) ?: STANDARD_GAP_WIDTH_PX,
             stripeWidth = styleSpan.stripeWidth?.toPx(context = context) ?: STANDARD_STRIPE_WIDTH_PX,
