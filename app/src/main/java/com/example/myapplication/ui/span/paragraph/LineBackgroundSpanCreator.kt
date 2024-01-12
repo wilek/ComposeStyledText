@@ -5,11 +5,11 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import androidx.annotation.ColorInt
 import androidx.annotation.Px
-import com.example.myapplication.ui.span.TextCombineSpan
+import com.example.myapplication.ui.span.TextCombineSpanCreator
 import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.ParagraphStyle.LineBackground
 import com.example.myapplication.ui.util.toColor
 
-open class LineBackgroundSpanCreator : TextCombineSpan<LineBackground> {
+open class LineBackgroundSpanCreator : TextCombineSpanCreator<LineBackground> {
 
     override fun createSpan(context: Context, styleSpan: LineBackground): Any {
         return LineBackgroundSpan(styleSpan.color.toColor(context = context))

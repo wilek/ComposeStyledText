@@ -27,12 +27,12 @@ import android.text.style.LeadingMarginSpan
 import androidx.annotation.ColorInt
 import androidx.annotation.Px
 import androidx.core.graphics.withTranslation
-import com.example.myapplication.ui.span.TextCombineSpan
+import com.example.myapplication.ui.span.TextCombineSpanCreator
 import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.ParagraphStyle.Bullet
 import com.example.myapplication.ui.util.toColor
 import com.example.myapplication.ui.util.toPx
 
-open class BulletSpanCreator : TextCombineSpan<Bullet> {
+open class BulletSpanCreator : TextCombineSpanCreator<Bullet> {
 
     override fun createSpan(context: Context, styleSpan: Bullet): Any {
         return BulletPointSpan(

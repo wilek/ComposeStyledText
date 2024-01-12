@@ -6,12 +6,12 @@ import android.graphics.Paint
 import android.graphics.drawable.Drawable
 import android.text.style.ReplacementSpan
 import androidx.annotation.IntRange
-import com.example.myapplication.ui.span.TextCombineSpan
+import com.example.myapplication.ui.span.TextCombineSpanCreator
 import com.example.myapplication.ui.string.combine.TextCombine.ImageAlignType
 import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.CharacterStyle.Image
 import com.example.myapplication.ui.util.toImage
 
-open class ImageSpanCreator : TextCombineSpan<Image> {
+open class ImageSpanCreator : TextCombineSpanCreator<Image> {
     override fun createSpan(context: Context, styleSpan: Image): Any {
         return ImageSpan(
             drawable = styleSpan.image.toImage(context = context, size = styleSpan.size, margin = styleSpan.margin),

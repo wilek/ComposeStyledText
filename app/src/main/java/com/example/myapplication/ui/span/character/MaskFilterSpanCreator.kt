@@ -3,12 +3,12 @@ package com.example.myapplication.ui.span.character
 import android.content.Context
 import android.graphics.BlurMaskFilter
 import android.text.style.MaskFilterSpan
-import com.example.myapplication.ui.span.TextCombineSpan
+import com.example.myapplication.ui.span.TextCombineSpanCreator
 import com.example.myapplication.ui.string.combine.TextCombine.BlurType
 import com.example.myapplication.ui.string.combine.TextCombine.MaskFilterType
 import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.CharacterStyle.MaskFilter
 
-open class MaskFilterSpanCreator : TextCombineSpan<MaskFilter> {
+open class MaskFilterSpanCreator : TextCombineSpanCreator<MaskFilter> {
     override fun createSpan(context: Context, styleSpan: MaskFilter): Any {
         return MaskFilterSpan(styleSpan.filterType.toMaskFilter())
     }

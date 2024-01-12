@@ -6,11 +6,11 @@ import android.text.TextPaint
 import android.text.style.MetricAffectingSpan
 import androidx.annotation.FontRes
 import androidx.core.content.res.ResourcesCompat
-import com.example.myapplication.ui.span.TextCombineSpan
+import com.example.myapplication.ui.span.TextCombineSpanCreator
 import com.example.myapplication.ui.string.combine.TextCombine.TypefaceSource
 import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.CharacterStyle.Typeface
 
-open class TypefaceSpanCreator : TextCombineSpan<Typeface> {
+open class TypefaceSpanCreator : TextCombineSpanCreator<Typeface> {
     override fun createSpan(context: Context, styleSpan: Typeface): Any {
         return when (val typeface = styleSpan.typeface) {
             is TypefaceSource.FromAssets -> TypefaceSpan(typeface = context.getFontFromAsset(fileName = typeface.fileName))

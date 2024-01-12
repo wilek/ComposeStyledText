@@ -8,12 +8,12 @@ import android.text.Layout
 import android.text.style.LeadingMarginSpan
 import androidx.annotation.ColorInt
 import androidx.annotation.Px
-import com.example.myapplication.ui.span.TextCombineSpan
+import com.example.myapplication.ui.span.TextCombineSpanCreator
 import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.ParagraphStyle.Quote
 import com.example.myapplication.ui.util.toColor
 import com.example.myapplication.ui.util.toPx
 
-open class QuoteSpanCreator : TextCombineSpan<Quote> {
+open class QuoteSpanCreator : TextCombineSpanCreator<Quote> {
 
     override fun createSpan(context: Context, styleSpan: Quote): Any {
         return QuoteSpan(
