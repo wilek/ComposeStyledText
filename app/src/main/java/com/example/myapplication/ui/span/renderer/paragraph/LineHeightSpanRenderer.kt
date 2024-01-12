@@ -1,16 +1,16 @@
-package com.example.myapplication.ui.span.paragraph
+package com.example.myapplication.ui.span.renderer.paragraph
 
 import android.content.Context
 import android.graphics.Paint
 import androidx.annotation.Px
-import com.example.myapplication.ui.span.TextCombineSpanCreator
+import com.example.myapplication.ui.span.renderer.SpanRenderer
 import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.ParagraphStyle.LineHeight
 import com.example.myapplication.ui.util.toPx
 import kotlin.math.roundToInt
 
-open class LineHeightSpanCreator : TextCombineSpanCreator<LineHeight> {
+open class LineHeightSpanRenderer : SpanRenderer<LineHeight> {
 
-    override fun createSpan(context: Context, styleSpan: LineHeight): Any {
+    override fun renderSpan(context: Context, styleSpan: LineHeight): Any {
         return LineHeightSpan(height = styleSpan.height.toPx(context = context))
     }
 

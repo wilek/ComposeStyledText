@@ -3,29 +3,29 @@ package com.example.myapplication.ui.string.combine
 import android.content.Context
 import android.text.Spannable
 import android.text.SpannableString
-import com.example.myapplication.ui.span.character.AbsoluteSizeSpanCreator
-import com.example.myapplication.ui.span.character.BackgroundColorSpanCreator
-import com.example.myapplication.ui.span.character.ClickableSpanCreator
-import com.example.myapplication.ui.span.character.ForegroundColorSpanCreator
-import com.example.myapplication.ui.span.character.ImageSpanCreator
-import com.example.myapplication.ui.span.character.MaskFilterSpanCreator
-import com.example.myapplication.ui.span.character.RelativeSizeSpanCreator
-import com.example.myapplication.ui.span.character.ScaleXSpanCreator
-import com.example.myapplication.ui.span.character.StrikethroughSpanCreator
-import com.example.myapplication.ui.span.character.StyleSpanCreator
-import com.example.myapplication.ui.span.character.SubscriptSpanCreator
-import com.example.myapplication.ui.span.character.SuperscriptSpanCreator
-import com.example.myapplication.ui.span.character.TextAppearanceSpanCreator
-import com.example.myapplication.ui.span.character.TypefaceSpanCreator
-import com.example.myapplication.ui.span.character.UnderlineSpanCreator
-import com.example.myapplication.ui.span.paragraph.AlignmentSpanCreator
-import com.example.myapplication.ui.span.paragraph.BulletSpanCreator
-import com.example.myapplication.ui.span.paragraph.LeadingImageSpanCreator
-import com.example.myapplication.ui.span.paragraph.LeadingMarginSpanCreator
-import com.example.myapplication.ui.span.paragraph.LineBackgroundSpanCreator
-import com.example.myapplication.ui.span.paragraph.LineHeightSpanCreator
-import com.example.myapplication.ui.span.paragraph.QuoteSpanCreator
-import com.example.myapplication.ui.span.paragraph.TabStopSpanCreator
+import com.example.myapplication.ui.span.renderer.character.AbsoluteSizeSpanRenderer
+import com.example.myapplication.ui.span.renderer.character.BackgroundColorSpanRenderer
+import com.example.myapplication.ui.span.renderer.character.ClickableSpanRenderer
+import com.example.myapplication.ui.span.renderer.character.ForegroundColorSpanRenderer
+import com.example.myapplication.ui.span.renderer.character.ImageSpanRenderer
+import com.example.myapplication.ui.span.renderer.character.MaskFilterSpanRenderer
+import com.example.myapplication.ui.span.renderer.character.RelativeSizeSpanRenderer
+import com.example.myapplication.ui.span.renderer.character.ScaleXSpanRenderer
+import com.example.myapplication.ui.span.renderer.character.StrikethroughSpanRenderer
+import com.example.myapplication.ui.span.renderer.character.StyleSpanRenderer
+import com.example.myapplication.ui.span.renderer.character.SubscriptSpanRenderer
+import com.example.myapplication.ui.span.renderer.character.SuperscriptSpanRenderer
+import com.example.myapplication.ui.span.renderer.character.TextAppearanceSpanRenderer
+import com.example.myapplication.ui.span.renderer.character.TypefaceSpanRenderer
+import com.example.myapplication.ui.span.renderer.character.UnderlineSpanRenderer
+import com.example.myapplication.ui.span.renderer.paragraph.AlignmentSpanRenderer
+import com.example.myapplication.ui.span.renderer.paragraph.BulletSpanRenderer
+import com.example.myapplication.ui.span.renderer.paragraph.LeadingImageSpanRenderer
+import com.example.myapplication.ui.span.renderer.paragraph.LeadingMarginSpanRenderer
+import com.example.myapplication.ui.span.renderer.paragraph.LineBackgroundSpanRenderer
+import com.example.myapplication.ui.span.renderer.paragraph.LineHeightSpanRenderer
+import com.example.myapplication.ui.span.renderer.paragraph.QuoteSpanRenderer
+import com.example.myapplication.ui.span.renderer.paragraph.TabStopSpanRenderer
 import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.CharacterStyle
 import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.ParagraphStyle
 import com.example.myapplication.ui.string.combine.TextCombine.TextSource.FromString
@@ -36,29 +36,29 @@ import com.example.myapplication.ui.string.combine.TextCombine.TextValue
 
 class TextCombineRenderer(
     private val context: Context,
-    private val absoluteSizeSpanCreator: AbsoluteSizeSpanCreator = AbsoluteSizeSpanCreator(),
-    private val backgroundColorSpanCreator: BackgroundColorSpanCreator = BackgroundColorSpanCreator(),
-    private val clickableSpanCreator: ClickableSpanCreator = ClickableSpanCreator(),
-    private val foregroundColorSpanCreator: ForegroundColorSpanCreator = ForegroundColorSpanCreator(),
-    private val imageSpanCreator: ImageSpanCreator = ImageSpanCreator(),
-    private val maskFilterSpanCreator: MaskFilterSpanCreator = MaskFilterSpanCreator(),
-    private val relativeSizeSpanCreator: RelativeSizeSpanCreator = RelativeSizeSpanCreator(),
-    private val scaleXSpanCreator: ScaleXSpanCreator = ScaleXSpanCreator(),
-    private val strikethroughSpanCreator: StrikethroughSpanCreator = StrikethroughSpanCreator(),
-    private val styleSpanCreator: StyleSpanCreator = StyleSpanCreator(),
-    private val subscriptSpanCreator: SubscriptSpanCreator = SubscriptSpanCreator(),
-    private val superscriptSpanCreator: SuperscriptSpanCreator = SuperscriptSpanCreator(),
-    private val textAppearanceSpanCreator: TextAppearanceSpanCreator = TextAppearanceSpanCreator(),
-    private val typefaceSpanCreator: TypefaceSpanCreator = TypefaceSpanCreator(),
-    private val underlineSpanCreator: UnderlineSpanCreator = UnderlineSpanCreator(),
-    private val alignmentSpanCreator: AlignmentSpanCreator = AlignmentSpanCreator(),
-    private val bulletSpanCreator: BulletSpanCreator = BulletSpanCreator(),
-    private val leadingImageSpanCreator: LeadingImageSpanCreator = LeadingImageSpanCreator(),
-    private val leadingMarginSpanCreator: LeadingMarginSpanCreator = LeadingMarginSpanCreator(),
-    private val lineBackgroundSpanCreator: LineBackgroundSpanCreator = LineBackgroundSpanCreator(),
-    private val lineHeightSpanCreator: LineHeightSpanCreator = LineHeightSpanCreator(),
-    private val quoteSpanCreator: QuoteSpanCreator = QuoteSpanCreator(),
-    private val tabStopSpanCreator: TabStopSpanCreator = TabStopSpanCreator()
+    private val absoluteSizeSpanCreator: AbsoluteSizeSpanRenderer = AbsoluteSizeSpanRenderer(),
+    private val backgroundColorSpanCreator: BackgroundColorSpanRenderer = BackgroundColorSpanRenderer(),
+    private val clickableSpanCreator: ClickableSpanRenderer = ClickableSpanRenderer(),
+    private val foregroundColorSpanCreator: ForegroundColorSpanRenderer = ForegroundColorSpanRenderer(),
+    private val imageSpanCreator: ImageSpanRenderer = ImageSpanRenderer(),
+    private val maskFilterSpanCreator: MaskFilterSpanRenderer = MaskFilterSpanRenderer(),
+    private val relativeSizeSpanCreator: RelativeSizeSpanRenderer = RelativeSizeSpanRenderer(),
+    private val scaleXSpanCreator: ScaleXSpanRenderer = ScaleXSpanRenderer(),
+    private val strikethroughSpanCreator: StrikethroughSpanRenderer = StrikethroughSpanRenderer(),
+    private val styleSpanCreator: StyleSpanRenderer = StyleSpanRenderer(),
+    private val subscriptSpanCreator: SubscriptSpanRenderer = SubscriptSpanRenderer(),
+    private val superscriptSpanCreator: SuperscriptSpanRenderer = SuperscriptSpanRenderer(),
+    private val textAppearanceSpanCreator: TextAppearanceSpanRenderer = TextAppearanceSpanRenderer(),
+    private val typefaceSpanCreator: TypefaceSpanRenderer = TypefaceSpanRenderer(),
+    private val underlineSpanCreator: UnderlineSpanRenderer = UnderlineSpanRenderer(),
+    private val alignmentSpanCreator: AlignmentSpanRenderer = AlignmentSpanRenderer(),
+    private val bulletSpanCreator: BulletSpanRenderer = BulletSpanRenderer(),
+    private val leadingImageSpanCreator: LeadingImageSpanRenderer = LeadingImageSpanRenderer(),
+    private val leadingMarginSpanCreator: LeadingMarginSpanRenderer = LeadingMarginSpanRenderer(),
+    private val lineBackgroundSpanCreator: LineBackgroundSpanRenderer = LineBackgroundSpanRenderer(),
+    private val lineHeightSpanCreator: LineHeightSpanRenderer = LineHeightSpanRenderer(),
+    private val quoteSpanCreator: QuoteSpanRenderer = QuoteSpanRenderer(),
+    private val tabStopSpanCreator: TabStopSpanRenderer = TabStopSpanRenderer()
 ) {
 
     private data class Text(val text: CharSequence, val spans: List<Span>) {
@@ -142,32 +142,32 @@ class TextCombineRenderer(
     }
 
     private fun CharacterStyle.resolve() = when (this) {
-        is CharacterStyle.AbsoluteSize -> absoluteSizeSpanCreator.createSpan(context = context, styleSpan = this)
-        is CharacterStyle.BackgroundColor -> backgroundColorSpanCreator.createSpan(context = context, styleSpan = this)
-        is CharacterStyle.Clickable -> clickableSpanCreator.createSpan(context = context, styleSpan = this)
-        is CharacterStyle.ForegroundColor -> foregroundColorSpanCreator.createSpan(context = context, styleSpan = this)
-        is CharacterStyle.Image -> imageSpanCreator.createSpan(context = context, styleSpan = this)
-        is CharacterStyle.MaskFilter -> maskFilterSpanCreator.createSpan(context = context, styleSpan = this)
-        is CharacterStyle.RelativeSize -> relativeSizeSpanCreator.createSpan(context = context, styleSpan = this)
-        is CharacterStyle.ScaleX -> scaleXSpanCreator.createSpan(context = context, styleSpan = this)
-        is CharacterStyle.Strikethrough -> strikethroughSpanCreator.createSpan(context = context, styleSpan = this)
-        is CharacterStyle.Style -> styleSpanCreator.createSpan(context = context, styleSpan = this)
-        is CharacterStyle.Subscript -> subscriptSpanCreator.createSpan(context = context, styleSpan = this)
-        is CharacterStyle.Superscript -> superscriptSpanCreator.createSpan(context = context, styleSpan = this)
-        is CharacterStyle.TextAppearance -> textAppearanceSpanCreator.createSpan(context = context, styleSpan = this)
-        is CharacterStyle.Typeface -> typefaceSpanCreator.createSpan(context = context, styleSpan = this)
-        is CharacterStyle.Underline -> underlineSpanCreator.createSpan(context = context, styleSpan = this)
+        is CharacterStyle.AbsoluteSize -> absoluteSizeSpanCreator.renderSpan(context = context, styleSpan = this)
+        is CharacterStyle.BackgroundColor -> backgroundColorSpanCreator.renderSpan(context = context, styleSpan = this)
+        is CharacterStyle.Clickable -> clickableSpanCreator.renderSpan(context = context, styleSpan = this)
+        is CharacterStyle.ForegroundColor -> foregroundColorSpanCreator.renderSpan(context = context, styleSpan = this)
+        is CharacterStyle.Image -> imageSpanCreator.renderSpan(context = context, styleSpan = this)
+        is CharacterStyle.MaskFilter -> maskFilterSpanCreator.renderSpan(context = context, styleSpan = this)
+        is CharacterStyle.RelativeSize -> relativeSizeSpanCreator.renderSpan(context = context, styleSpan = this)
+        is CharacterStyle.ScaleX -> scaleXSpanCreator.renderSpan(context = context, styleSpan = this)
+        is CharacterStyle.Strikethrough -> strikethroughSpanCreator.renderSpan(context = context, styleSpan = this)
+        is CharacterStyle.Style -> styleSpanCreator.renderSpan(context = context, styleSpan = this)
+        is CharacterStyle.Subscript -> subscriptSpanCreator.renderSpan(context = context, styleSpan = this)
+        is CharacterStyle.Superscript -> superscriptSpanCreator.renderSpan(context = context, styleSpan = this)
+        is CharacterStyle.TextAppearance -> textAppearanceSpanCreator.renderSpan(context = context, styleSpan = this)
+        is CharacterStyle.Typeface -> typefaceSpanCreator.renderSpan(context = context, styleSpan = this)
+        is CharacterStyle.Underline -> underlineSpanCreator.renderSpan(context = context, styleSpan = this)
     }
 
     private fun ParagraphStyle.resolve() = when (this) {
-        is ParagraphStyle.Alignment -> alignmentSpanCreator.createSpan(context = context, styleSpan = this)
-        is ParagraphStyle.Bullet -> bulletSpanCreator.createSpan(context = context, styleSpan = this)
-        is ParagraphStyle.LeadingImage -> leadingImageSpanCreator.createSpan(context = context, styleSpan = this)
-        is ParagraphStyle.LeadingMargin -> leadingMarginSpanCreator.createSpan(context = context, styleSpan = this)
-        is ParagraphStyle.LineBackground -> lineBackgroundSpanCreator.createSpan(context = context, styleSpan = this)
-        is ParagraphStyle.LineHeight -> lineHeightSpanCreator.createSpan(context = context, styleSpan = this)
-        is ParagraphStyle.Quote -> quoteSpanCreator.createSpan(context = context, styleSpan = this)
-        is ParagraphStyle.TabStop -> tabStopSpanCreator.createSpan(context = context, styleSpan = this)
+        is ParagraphStyle.Alignment -> alignmentSpanCreator.renderSpan(context = context, styleSpan = this)
+        is ParagraphStyle.Bullet -> bulletSpanCreator.renderSpan(context = context, styleSpan = this)
+        is ParagraphStyle.LeadingImage -> leadingImageSpanCreator.renderSpan(context = context, styleSpan = this)
+        is ParagraphStyle.LeadingMargin -> leadingMarginSpanCreator.renderSpan(context = context, styleSpan = this)
+        is ParagraphStyle.LineBackground -> lineBackgroundSpanCreator.renderSpan(context = context, styleSpan = this)
+        is ParagraphStyle.LineHeight -> lineHeightSpanCreator.renderSpan(context = context, styleSpan = this)
+        is ParagraphStyle.Quote -> quoteSpanCreator.renderSpan(context = context, styleSpan = this)
+        is ParagraphStyle.TabStop -> tabStopSpanCreator.renderSpan(context = context, styleSpan = this)
     }
 
     private fun Text.   moveSpansBy(size: Int) = copy(

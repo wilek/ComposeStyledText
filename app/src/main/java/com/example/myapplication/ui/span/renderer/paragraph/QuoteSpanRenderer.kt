@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.span.paragraph
+package com.example.myapplication.ui.span.renderer.paragraph
 
 import android.content.Context
 import android.graphics.Canvas
@@ -8,14 +8,14 @@ import android.text.Layout
 import android.text.style.LeadingMarginSpan
 import androidx.annotation.ColorInt
 import androidx.annotation.Px
-import com.example.myapplication.ui.span.TextCombineSpanCreator
+import com.example.myapplication.ui.span.renderer.SpanRenderer
 import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.ParagraphStyle.Quote
 import com.example.myapplication.ui.util.toColor
 import com.example.myapplication.ui.util.toPx
 
-open class QuoteSpanCreator : TextCombineSpanCreator<Quote> {
+open class QuoteSpanRenderer : SpanRenderer<Quote> {
 
-    override fun createSpan(context: Context, styleSpan: Quote): Any {
+    override fun renderSpan(context: Context, styleSpan: Quote): Any {
         return QuoteSpan(
             gapWidth = styleSpan.gapWidth?.toPx(context = context) ?: STANDARD_GAP_WIDTH_PX,
             stripeWidth = styleSpan.stripeWidth?.toPx(context = context) ?: STANDARD_STRIPE_WIDTH_PX,

@@ -1,17 +1,17 @@
-package com.example.myapplication.ui.span.paragraph
+package com.example.myapplication.ui.span.renderer.paragraph
 
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 import androidx.annotation.ColorInt
 import androidx.annotation.Px
-import com.example.myapplication.ui.span.TextCombineSpanCreator
+import com.example.myapplication.ui.span.renderer.SpanRenderer
 import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.ParagraphStyle.LineBackground
 import com.example.myapplication.ui.util.toColor
 
-open class LineBackgroundSpanCreator : TextCombineSpanCreator<LineBackground> {
+open class LineBackgroundSpanRenderer : SpanRenderer<LineBackground> {
 
-    override fun createSpan(context: Context, styleSpan: LineBackground): Any {
+    override fun renderSpan(context: Context, styleSpan: LineBackground): Any {
         return LineBackgroundSpan(styleSpan.color.toColor(context = context))
     }
 

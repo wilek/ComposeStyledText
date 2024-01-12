@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.span.character
+package com.example.myapplication.ui.span.renderer.character
 
 import android.content.Context
 import android.graphics.Paint
@@ -6,12 +6,12 @@ import android.text.TextPaint
 import android.text.style.MetricAffectingSpan
 import androidx.annotation.FontRes
 import androidx.core.content.res.ResourcesCompat
-import com.example.myapplication.ui.span.TextCombineSpanCreator
+import com.example.myapplication.ui.span.renderer.SpanRenderer
 import com.example.myapplication.ui.string.combine.TextCombine.TypefaceSource
 import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.CharacterStyle.Typeface
 
-open class TypefaceSpanCreator : TextCombineSpanCreator<Typeface> {
-    override fun createSpan(context: Context, styleSpan: Typeface): Any {
+open class TypefaceSpanRenderer : SpanRenderer<Typeface> {
+    override fun renderSpan(context: Context, styleSpan: Typeface): Any {
         return when (val typeface = styleSpan.typeface) {
             is TypefaceSource.FromAssets -> TypefaceSpan(typeface = context.getFontFromAsset(fileName = typeface.fileName))
             is TypefaceSource.FromFamilyName -> FamilyNameTypefaceSpan(familyName = typeface.familyName)

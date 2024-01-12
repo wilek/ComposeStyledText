@@ -1,13 +1,13 @@
-package com.example.myapplication.ui.span.character
+package com.example.myapplication.ui.span.renderer.character
 
 import android.content.Context
 import android.text.style.ClickableSpan
 import android.view.View
-import com.example.myapplication.ui.span.TextCombineSpanCreator
+import com.example.myapplication.ui.span.renderer.SpanRenderer
 import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.CharacterStyle.Clickable
 
-open class ClickableSpanCreator : TextCombineSpanCreator<Clickable> {
-    override fun createSpan(context: Context, styleSpan: Clickable): Any {
+open class ClickableSpanRenderer : SpanRenderer<Clickable> {
+    override fun renderSpan(context: Context, styleSpan: Clickable): Any {
         return TextCombineClickableSpan(
             id = styleSpan.id,
             onClick = styleSpan.onClick

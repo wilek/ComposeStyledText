@@ -1,15 +1,15 @@
-package com.example.myapplication.ui.span.paragraph
+package com.example.myapplication.ui.span.renderer.paragraph
 
 import android.content.Context
 import android.text.Layout
 import android.text.style.AlignmentSpan
-import com.example.myapplication.ui.span.TextCombineSpanCreator
+import com.example.myapplication.ui.span.renderer.SpanRenderer
 import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.ParagraphStyle.Alignment
 import com.example.myapplication.ui.string.combine.TextCombine.TextAlignmentType
 
-open class AlignmentSpanCreator : TextCombineSpanCreator<Alignment> {
+open class AlignmentSpanRenderer : SpanRenderer<Alignment> {
 
-    override fun createSpan(context: Context, styleSpan: Alignment): Any {
+    override fun renderSpan(context: Context, styleSpan: Alignment): Any {
         return AlignmentSpan.Standard(styleSpan.alignment.toAlignment())
     }
 

@@ -1,14 +1,14 @@
-package com.example.myapplication.ui.span.paragraph
+package com.example.myapplication.ui.span.renderer.paragraph
 
 import android.content.Context
 import android.text.style.TabStopSpan
-import com.example.myapplication.ui.span.TextCombineSpanCreator
+import com.example.myapplication.ui.span.renderer.SpanRenderer
 import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.ParagraphStyle.TabStop
 import com.example.myapplication.ui.util.toPx
 
-open class TabStopSpanCreator : TextCombineSpanCreator<TabStop> {
+open class TabStopSpanRenderer : SpanRenderer<TabStop> {
 
-    override fun createSpan(context: Context, styleSpan: TabStop): Any {
+    override fun renderSpan(context: Context, styleSpan: TabStop): Any {
         return TabStopSpan.Standard(styleSpan.offset.toPx(context = context))
     }
 }
