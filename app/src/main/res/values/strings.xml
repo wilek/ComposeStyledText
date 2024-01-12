@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="main_text">Lorem %1\$s is simply %2\$s text of the %3\$s and %4\$s industry.</string>
+    <string name="replacement_on">Ipsum</string>
+    <string name="replacement_two">dummy</string>
+    <string name="replacement_three">printing</string>
+    <string name="replacement_four">typesetting</string>
 </resources>

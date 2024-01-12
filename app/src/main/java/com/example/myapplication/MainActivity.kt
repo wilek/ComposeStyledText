@@ -1,14 +1,20 @@
 package com.example.myapplication
 
+import android.graphics.Color
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.BulletSpan
+import android.text.style.LineBackgroundSpan
+import android.text.style.QuoteSpan
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myapplication.ui.string.combine.StringCombine
-import com.example.myapplication.ui.string.combine.StringCombineRenderer
+import com.example.myapplication.ui.string.combine.TextCombine
+import com.example.myapplication.ui.string.combine.TextCombineRenderer
 
 class MainActivity : AppCompatActivity() {
 
-    private val stringCombineRenderer by lazy { StringCombineRenderer(this) }
+    private val textCombineRenderer by lazy { TextCombineRenderer(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,30 +22,61 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(textView)
 
-        textView.text = stringCombineRenderer.render(testStringCombine())
+
+        textView.text = textCombineRenderer.render(testStringCombine2())
+
+
+        //LineBackgroundSpan()
+
+        //textView.text = spannableString
+
+        //setContentView(textView)
     }
 
-    private fun testStringCombine() = StringCombine(
+    private fun testStringCombine2() = TextCombine(
         texts = listOf(
-            StringCombine.TextValue(
-                source = StringCombine.TextSource.FromString("Lorem %1\$s is simply %2\$s text of the %3\$s and %4\$s industry."),
+            TextCombine.TextValue(
+                source = TextCombine.TextSource.FromString("Dupa"),
                 span = listOf(
-                    StringCombine.TextSpan.ForegroundColorSpan(color = StringCombine.ColorSource.FromString("#FF0000"))
+                    TextCombine.StyleSpan.ParagraphStyle.Quote(),
+                )
+            ),
+            TextCombine.TextValue(
+                source = TextCombine.TextSource.FromString("\n")
+            ),
+            TextCombine.TextValue(
+                source = TextCombine.TextSource.FromString("One"),
+                span = listOf(
+                    TextCombine.StyleSpan.ParagraphStyle.Quote(),
+                )
+            ),
+        )
+    )
+
+    private fun testStringResCombine() =  TextCombine(
+        texts = listOf(
+            TextCombine.TextValue(
+                source = TextCombine.TextSource.FromStringResource(resourceId = R.string.main_text),
+                span = listOf(
+                    TextCombine.StyleSpan.CharacterStyle.ForegroundColor(color = TextCombine.ColorSource.FromString("#FF0000"))
                 ),
                 formatArgs = listOf(
-                    StringCombine.TextValue(
-                        source = StringCombine.TextSource.FromString("Ipsum"),
+                    TextCombine.TextValue(
+                        source = TextCombine.TextSource.FromStringResource(resourceId = R.string.replacement_on),
                         span = listOf(
-                            StringCombine.TextSpan.TypefaceSpan.Bold,
-                            StringCombine.TextSpan.ForegroundColorSpan(color = StringCombine.ColorSource.FromString("#00FF00"))
+                            TextCombine.StyleSpan.CharacterStyle.Style(typefaceStyle = TextCombine.TypefaceStyle.BOLD),
+                            TextCombine.StyleSpan.CharacterStyle.ForegroundColor(color = TextCombine.ColorSource.FromString("#00FF00"))
                         )
                     ),
-                    StringCombine.TextValue(source = StringCombine.TextSource.FromString("dummy")),
-                    StringCombine.TextValue(source = StringCombine.TextSource.FromString("printing")),
-                    StringCombine.TextValue(
-                        source = StringCombine.TextSource.FromString("typesetting"),
-                        span = listOf(StringCombine.TextSpan.TypefaceSpan.Bold, StringCombine.TextSpan.TypefaceSpan.Italic)
-                    ),
+                    TextCombine.TextValue(source = TextCombine.TextSource.FromStringResource(resourceId = R.string.replacement_two)),
+                    TextCombine.TextValue(source = TextCombine.TextSource.FromStringResource(resourceId = R.string.replacement_three)),
+                    TextCombine.TextValue(
+                        source = TextCombine.TextSource.FromString("ddss"),
+                        span = listOf(
+                            TextCombine.StyleSpan.CharacterStyle.Style(typefaceStyle = TextCombine.TypefaceStyle.BOLD),
+                            TextCombine.StyleSpan.CharacterStyle.Style(typefaceStyle = TextCombine.TypefaceStyle.ITALIC)
+                        )
+                    )
                 )
             )
         )
