@@ -4,9 +4,11 @@ import android.graphics.Color
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
+import android.text.style.BackgroundColorSpan
 import android.text.style.BulletSpan
 import android.text.style.LineBackgroundSpan
 import android.text.style.QuoteSpan
+import android.text.style.UnderlineSpan
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.ui.string.combine.TextCombine
@@ -22,8 +24,58 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(textView)
 
+        val aa = SpannableString("Paragraph one\nParagraph two")
 
-        textView.text = textCombineRenderer.render(testStringCombine2())
+        aa.setSpan(BulletSpan(), 0, 13, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        //aa.setSpan(UnderlineSpan(), 13, 28, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        aa.setSpan(BulletSpan(), 14, 27, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+        val textCombine = TextCombine(
+            texts = listOf(
+                TextCombine.TextValue(
+                    source = TextCombine.TextSource.FromString("Paragraph one\n%s"),
+                    span = listOf(
+                        TextCombine.StyleSpan.ParagraphStyle.Quote(stripeWidth = TextCombine.DimensionValue.FromPx(10))
+                    ),
+                    formatArgs = listOf(
+                        TextCombine.TextValue(
+                            source = TextCombine.TextSource.FromString("Paragraph two"),
+                            span = listOf(TextCombine.StyleSpan.CharacterStyle.Underline)
+                        ),
+                    )
+                ),
+                TextCombine.TextValue(
+                    source = TextCombine.TextSource.FromString("\nParagraph three"),
+                    span = listOf(
+                        TextCombine.StyleSpan.ParagraphStyle.Quote(stripeWidth = TextCombine.DimensionValue.FromPx(10))
+                    )
+                )
+            )
+        )
+
+        val textCombine2 = TextCombine(
+            texts = listOf(
+                TextCombine.TextValue(
+                    source = TextCombine.TextSource.FromString("Paragraph one"),
+                    span = listOf(
+                        TextCombine.StyleSpan.ParagraphStyle.Bullet()
+                    )
+                ),
+                TextCombine.TextValue(
+                    source = TextCombine.TextSource.FromString("\n")
+                ),
+                TextCombine.TextValue(
+                    source = TextCombine.TextSource.FromString("Paragraph two"),
+                    span = listOf(
+                        TextCombine.StyleSpan.ParagraphStyle.Bullet()
+                    )
+                )
+            )
+        )
+
+
+        textView.text = textCombineRenderer.render(textCombine2)
+        //textView.text = aa
 
 
         //LineBackgroundSpan()
@@ -36,20 +88,33 @@ class MainActivity : AppCompatActivity() {
     private fun testStringCombine2() = TextCombine(
         texts = listOf(
             TextCombine.TextValue(
-                source = TextCombine.TextSource.FromString("Dupa"),
+                source = TextCombine.TextSource.FromString("Dupa%s\n"),
+                span = listOf(
+                    TextCombine.StyleSpan.ParagraphStyle.Quote(),
+                ),
+                formatArgs = listOf(
+                    TextCombine.TextValue(
+                        source = TextCombine.TextSource.FromString("test"),
+                        span = listOf(
+                            TextCombine.StyleSpan.CharacterStyle.ForegroundColor(color = TextCombine.ColorSource.FromInt(Color.RED))
+                        ),
+                    )
+                )
+            ),
+            TextCombine.TextValue(
+                source = TextCombine.TextSource.FromString("Dupa2"),
                 span = listOf(
                     TextCombine.StyleSpan.ParagraphStyle.Quote(),
                 )
             ),
-            TextCombine.TextValue(
-                source = TextCombine.TextSource.FromString("\n")
-            ),
-            TextCombine.TextValue(
-                source = TextCombine.TextSource.FromString("One"),
+            /*TextCombine.TextValue(
+                source = TextCombine.TextSource.FromString("Dupa3"),
                 span = listOf(
                     TextCombine.StyleSpan.ParagraphStyle.Quote(),
                 )
-            ),
+            )*/
+
+
         )
     )
 

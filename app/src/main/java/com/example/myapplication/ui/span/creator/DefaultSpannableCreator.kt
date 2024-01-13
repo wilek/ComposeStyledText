@@ -1,6 +1,8 @@
 package com.example.myapplication.ui.span.creator
 
 import android.content.Context
+import android.text.Spannable
+import android.text.SpannableString
 import com.example.myapplication.ui.span.renderer.character.AbsoluteSizeSpanRenderer
 import com.example.myapplication.ui.span.renderer.character.BackgroundColorSpanRenderer
 import com.example.myapplication.ui.span.renderer.character.ClickableSpanRenderer
@@ -48,11 +50,30 @@ import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.Paragra
 import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.ParagraphStyle.LineHeight
 import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.ParagraphStyle.Quote
 import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.ParagraphStyle.TabStop
+import com.example.myapplication.ui.string.combine.TextCombineRenderer.PhraseSpan
 
-class DefaultSpanCreator : SpanCreator {
+class DefaultSpannableCreator : SpannableCreator {
 
-    override fun createSpan(context: Context, span: StyleSpan): Any {
-        return span.resolve(context = context)
+    override fun createSpan(
+        context: Context,
+        text: CharSequence,
+        textSpans: List<PhraseSpan>
+    ): CharSequence {
+        val spannable = SpannableString(text)
+
+        textSpans.forEach { textSpan ->
+            textSpan.spans.forEach { span ->
+                spannable.setSpan(
+                    span.resolve(context = context),
+                    textSpan.start,
+                    textSpan.end,
+                    Spannable.SPAN_INCLUSIVE_EXCLUSIVE
+                )
+            }
+        }
+
+
+        return spannable
     }
 
     private fun StyleSpan.resolve(context: Context) = when (this) {
