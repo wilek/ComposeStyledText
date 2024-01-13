@@ -13,7 +13,9 @@ import com.example.myapplication.ui.util.toImage
 
 open class ImageSpanRenderer(private val context: Context) : SpanRenderer<Image> {
 
-    override fun renderSpan(styleSpan: Image): Any {
+    override fun renderSpan(
+        styleSpan: Image
+    ): Any {
         return ImageSpan(
             drawable = styleSpan.image.toImage(context = context, size = styleSpan.size, margin = styleSpan.margin),
             alignment = styleSpan.alignType
@@ -35,13 +37,17 @@ open class ImageSpanRenderer(private val context: Context) : SpanRenderer<Image>
             val rect = drawable.bounds
 
             if (fm != null) {
-                fm.ascent = -rect.bottom
-                fm.descent = 0
+                val fontMetrics = paint.fontMetricsInt
+                val fontHeight = fontMetrics.descent - fontMetrics.ascent
+                val drawableHeight = rect.bottom - rect.top
+                val centerY = fontMetrics.ascent + fontHeight / 2
+                fm.ascent = centerY - drawableHeight / 2
                 fm.top = fm.ascent
-                fm.bottom = 0
+                fm.bottom = centerY + drawableHeight / 2
+                fm.descent = fm.bottom
             }
 
-            return rect.right
+            return drawable.bounds.right
         }
 
         override fun draw(
@@ -58,14 +64,37 @@ open class ImageSpanRenderer(private val context: Context) : SpanRenderer<Image>
             canvas.save()
 
             val transY = when (alignment) {
-                ImageAlignType.ALIGN_BASELINE -> bottom - drawable.bounds.bottom - paint.fontMetricsInt.descent
-                ImageAlignType.ALIGN_CENTER -> top + (bottom - top) / 2 - drawable.bounds.height() / 2
-                ImageAlignType.ALIGN_BOTTOM -> bottom - drawable.bounds.bottom
+                ImageAlignType.ALIGN_BASELINE -> calculateBaselineTransY(bottom = bottom, paint = paint)
+                ImageAlignType.ALIGN_CENTER -> calculateCenterTransY(y = y, paint = paint)
+                ImageAlignType.ALIGN_BOTTOM -> calculateBottomTransY(bottom = bottom)
             }
 
             canvas.translate(x, transY.toFloat())
             drawable.draw(canvas)
             canvas.restore()
+        }
+
+        private fun calculateBaselineTransY(
+            bottom: Int,
+            paint: Paint
+        ): Int {
+            return bottom - drawable.bounds.bottom - paint.fontMetricsInt.descent
+        }
+
+        private fun calculateCenterTransY(
+            y: Int,
+            paint: Paint
+        ): Int {
+            val fontMetrics = paint.fontMetricsInt
+            val fontHeight = fontMetrics.descent - fontMetrics.ascent
+            val centerY = y + fontMetrics.descent - fontHeight / 2
+            return centerY - (drawable.bounds.bottom - drawable.bounds.top) / 2
+        }
+
+        private fun calculateBottomTransY(
+            bottom: Int,
+        ): Int {
+            return bottom - drawable.bounds.bottom
         }
     }
 }
