@@ -29,9 +29,9 @@ class TextCombineRenderer(
     }
 
     private fun readTextValue(textValue: TextValue) = when (val source = textValue.source) {
-        is FromString -> source.readString(formatArgs = textValue.formatArgs, spans = textValue.span)
-        is FromStringResource -> source.readString(formatArgs = textValue.formatArgs, spans = textValue.span)
-        is FromStringPluralResource -> source.readString(formatArgs = textValue.formatArgs, spans = textValue.span)
+        is FromString -> source.readString(formatArgs = textValue.formatArgs, spans = textValue.spans)
+        is FromStringResource -> source.readString(formatArgs = textValue.formatArgs, spans = textValue.spans)
+        is FromStringPluralResource -> source.readString(formatArgs = textValue.formatArgs, spans = textValue.spans)
     }
 
     private fun FromString.readString(
@@ -45,14 +45,14 @@ class TextCombineRenderer(
         formatArgs: List<TextValue>,
         spans: List<TextCombine.StyleSpan>
     ): Phrase {
-        return formatText(text = context.getString(resourceId), formatArgs = formatArgs, spans = spans)
+        return formatText(text = context.getString(stringResId), formatArgs = formatArgs, spans = spans)
     }
 
     private fun FromStringPluralResource.readString(
         formatArgs: List<TextValue>,
         spans: List<TextCombine.StyleSpan>
     ): Phrase {
-        return formatText(text = context.resources.getQuantityString(resourceId, count), formatArgs = formatArgs, spans = spans)
+        return formatText(text = context.resources.getQuantityString(pluralResId, count), formatArgs = formatArgs, spans = spans)
     }
 
     private fun formatText(

@@ -10,5 +10,5 @@ import com.example.myapplication.ui.string.combine.TextCombine.ColorSource.FromR
 internal fun ColorSource.toColor(context: Context) = when (this) {
     is FromString -> Color.parseColor(color)
     is FromInt -> color
-    is FromResources -> context.getColor(resourceId)
+    is FromResources -> context.getColor(colorResId)
 }

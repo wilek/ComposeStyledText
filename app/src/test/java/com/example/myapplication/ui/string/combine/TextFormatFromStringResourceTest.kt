@@ -35,12 +35,12 @@ internal class TextFormatFromStringResourceTest {
         val textCombine = TextCombine(
             texts = listOf(
                 TextValue(
-                    source = FromStringResource(resourceId = 1),
+                    source = FromStringResource(stringResId = 1),
                     formatArgs = listOf(
-                        TextValue(source = FromStringResource(resourceId = 2)),
-                        TextValue(source = FromStringResource(resourceId = 3)),
-                        TextValue(source = FromStringResource(resourceId = 4)),
-                        TextValue(source = FromStringResource(resourceId = 5))
+                        TextValue(source = FromStringResource(stringResId = 2)),
+                        TextValue(source = FromStringResource(stringResId = 3)),
+                        TextValue(source = FromStringResource(stringResId = 4)),
+                        TextValue(source = FromStringResource(stringResId = 5))
                     )
                 )
             )
@@ -65,15 +65,15 @@ internal class TextFormatFromStringResourceTest {
         val textCombine = TextCombine(
             texts = listOf(
                 TextValue(
-                    source = FromStringResource(resourceId = 1),
+                    source = FromStringResource(stringResId = 1),
                     formatArgs = listOf(
                         TextValue(
-                            source = FromStringResource(resourceId = 2),
+                            source = FromStringResource(stringResId = 2),
                             formatArgs = listOf(
-                                TextValue(source = FromStringResource(resourceId = 3)),
-                                TextValue(source = FromStringResource(resourceId = 4)),
-                                TextValue(source = FromStringResource(resourceId = 5)),
-                                TextValue(source = FromStringResource(resourceId = 6))
+                                TextValue(source = FromStringResource(stringResId = 3)),
+                                TextValue(source = FromStringResource(stringResId = 4)),
+                                TextValue(source = FromStringResource(stringResId = 5)),
+                                TextValue(source = FromStringResource(stringResId = 6))
                             )
                         )
                     )

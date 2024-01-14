@@ -35,12 +35,12 @@ internal class TextFormatFromStringPluralResourceTest {
         val textCombine = TextCombine(
             texts = listOf(
                 TextValue(
-                    source = FromStringPluralResource(resourceId = 1, count = 1),
+                    source = FromStringPluralResource(pluralResId = 1, count = 1),
                     formatArgs = listOf(
-                        TextValue(source = FromStringPluralResource(resourceId = 2, count = 1)),
-                        TextValue(source = FromStringPluralResource(resourceId = 3, count = 1)),
-                        TextValue(source = FromStringPluralResource(resourceId = 4, count = 1)),
-                        TextValue(source = FromStringPluralResource(resourceId = 5, count = 1))
+                        TextValue(source = FromStringPluralResource(pluralResId = 2, count = 1)),
+                        TextValue(source = FromStringPluralResource(pluralResId = 3, count = 1)),
+                        TextValue(source = FromStringPluralResource(pluralResId = 4, count = 1)),
+                        TextValue(source = FromStringPluralResource(pluralResId = 5, count = 1))
                     )
                 )
             )
@@ -70,15 +70,15 @@ internal class TextFormatFromStringPluralResourceTest {
         val textCombine = TextCombine(
             texts = listOf(
                 TextValue(
-                    source = FromStringPluralResource(resourceId = 1, count = 1),
+                    source = FromStringPluralResource(pluralResId = 1, count = 1),
                     formatArgs = listOf(
                         TextValue(
-                            source = FromStringPluralResource(resourceId = 2, count = 1),
+                            source = FromStringPluralResource(pluralResId = 2, count = 1),
                             formatArgs = listOf(
-                                TextValue(source = FromStringPluralResource(resourceId = 3, count = 1)),
-                                TextValue(source = FromStringPluralResource(resourceId = 4, count = 1)),
-                                TextValue(source = FromStringPluralResource(resourceId = 5, count = 1)),
-                                TextValue(source = FromStringPluralResource(resourceId = 6, count = 1))
+                                TextValue(source = FromStringPluralResource(pluralResId = 3, count = 1)),
+                                TextValue(source = FromStringPluralResource(pluralResId = 4, count = 1)),
+                                TextValue(source = FromStringPluralResource(pluralResId = 5, count = 1)),
+                                TextValue(source = FromStringPluralResource(pluralResId = 6, count = 1))
                             )
                         )
                     )

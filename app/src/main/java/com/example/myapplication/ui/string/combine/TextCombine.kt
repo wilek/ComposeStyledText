@@ -18,20 +18,20 @@ data class TextCombine(val texts: List<TextValue>) {
     data class TextValue(
         val source: TextSource,
         val formatArgs: List<TextValue> = emptyList(),
-        val span: List<StyleSpan> = emptyList()
+        val spans: List<StyleSpan> = emptyList()
     )
 
     sealed class TextSource {
         data class FromString(val text: String) : TextSource()
-        data class FromStringResource(@StringRes val resourceId: Int) : TextSource()
-        data class FromStringPluralResource(@PluralsRes val resourceId: Int, val count: Int) : TextSource()
+        data class FromStringResource(@StringRes val stringResId: Int) : TextSource()
+        data class FromStringPluralResource(@PluralsRes val pluralResId: Int, val count: Int) : TextSource()
     }
 
     sealed class StyleSpan {
         sealed class CharacterStyle : StyleSpan() {
             data class AbsoluteSize(val size: DimensionValue): CharacterStyle()
             data class BackgroundColor(val color: ColorSource) : CharacterStyle()
-            data class Clickable(val id: String?, val onClick: (id: String?) -> Unit) : CharacterStyle()
+            data class Clickable(val onClick: (id: String?) -> Unit, val id: String? = null) : CharacterStyle()
             data class ForegroundColor(val color: ColorSource) : CharacterStyle()
             data class Image(
                 val image: ImageSource,
@@ -83,7 +83,7 @@ data class TextCombine(val texts: List<TextValue>) {
     sealed class ColorSource {
         data class FromString(val color: String) : ColorSource()
         data class FromInt(@ColorInt val color: Int) : ColorSource()
-        data class FromResources(@ColorRes val resourceId: Int) : ColorSource()
+        data class FromResources(@ColorRes val colorResId: Int) : ColorSource()
     }
 
     sealed class ImageSource {
