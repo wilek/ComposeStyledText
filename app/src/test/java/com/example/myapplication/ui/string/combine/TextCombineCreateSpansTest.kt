@@ -22,7 +22,7 @@ internal class TextCombineCreateSpansTest {
             texts = listOf(
                 TextCombine.TextValue(
                     source = TextCombine.TextSource.FromString("Paragraph one"),
-                    span = listOf(Quote())
+                    spans = listOf(Quote())
                 )
             )
         )
@@ -45,14 +45,14 @@ internal class TextCombineCreateSpansTest {
             texts = listOf(
                 TextCombine.TextValue(
                     source = TextCombine.TextSource.FromString("Paragraph one"),
-                    span = listOf(Quote())
+                    spans = listOf(Quote())
                 ),
                 TextCombine.TextValue(
                     source = TextCombine.TextSource.FromString("\n")
                 ),
                 TextCombine.TextValue(
                     source = TextCombine.TextSource.FromString("Paragraph two"),
-                    span = listOf(Quote())
+                    spans = listOf(Quote())
                 )
             )
         )
@@ -78,11 +78,11 @@ internal class TextCombineCreateSpansTest {
             texts = listOf(
                 TextCombine.TextValue(
                     source = TextCombine.TextSource.FromString("Paragraph %s"),
-                    span = listOf(Quote()),
+                    spans = listOf(Quote()),
                     formatArgs = listOf(
                         TextCombine.TextValue(
                             source = TextCombine.TextSource.FromString("one"),
-                            span = listOf(Underline)
+                            spans = listOf(Underline)
                         )
                     )
                 ),
@@ -91,7 +91,7 @@ internal class TextCombineCreateSpansTest {
                 ),
                 TextCombine.TextValue(
                     source = TextCombine.TextSource.FromString("Paragraph two"),
-                    span = listOf(Quote())
+                    spans = listOf(Quote())
                 )
             )
         )
