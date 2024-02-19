@@ -1,17 +1,11 @@
 package com.example.myapplication
 
-import android.graphics.Color
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
-import android.text.style.BackgroundColorSpan
 import android.text.style.BulletSpan
-import android.text.style.LineBackgroundSpan
-import android.text.style.QuoteSpan
-import android.text.style.UnderlineSpan
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myapplication.ui.string.combine.TextCombine
 import com.example.myapplication.ui.string.combine.TextCombineRenderer
 
 class MainActivity : AppCompatActivity() {
@@ -30,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         //aa.setSpan(UnderlineSpan(), 13, 28, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         aa.setSpan(BulletSpan(), 14, 27, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 
-        val textCombine = TextCombine(
+        /*val textCombine = TextCombine(
             texts = listOf(
                 TextCombine.TextValue(
                     source = TextCombine.TextSource.FromString("Paragraph one\n%s"),
@@ -51,9 +45,9 @@ class MainActivity : AppCompatActivity() {
                     )
                 )
             )
-        )
+        )*/
 
-        val textCombine2 = TextCombine(
+        /*val textCombine2 = TextCombine(
             texts = listOf(
                 TextCombine.TextValue(
                     source = TextCombine.TextSource.FromString("Paragraph one"),
@@ -71,10 +65,10 @@ class MainActivity : AppCompatActivity() {
                     )
                 )
             )
-        )
+        )*/
 
 
-        textView.text = textCombineRenderer.render(textCombine2)
+        //textView.text = textCombineRenderer.render(textCombine2)
         //textView.text = aa
 
 
@@ -85,7 +79,7 @@ class MainActivity : AppCompatActivity() {
         //setContentView(textView)
     }
 
-    private fun testStringCombine2() = TextCombine(
+    /*private fun testStringCombine2() = TextCombine(
         texts = listOf(
             TextCombine.TextValue(
                 source = TextCombine.TextSource.FromString("Dupa%s\n"),
@@ -107,18 +101,18 @@ class MainActivity : AppCompatActivity() {
                     TextCombine.StyleSpan.ParagraphStyle.Quote(),
                 )
             ),
-            /*TextCombine.TextValue(
+            *//*TextCombine.TextValue(
                 source = TextCombine.TextSource.FromString("Dupa3"),
                 span = listOf(
                     TextCombine.StyleSpan.ParagraphStyle.Quote(),
                 )
-            )*/
+            )*//*
 
 
         )
-    )
+    )*/
 
-    private fun testStringResCombine() =  TextCombine(
+    /*private fun testStringResCombine() =  TextCombine(
         texts = listOf(
             TextCombine.TextValue(
                 source = TextCombine.TextSource.FromStringResource(resourceId = R.string.main_text),
@@ -145,5 +139,5 @@ class MainActivity : AppCompatActivity() {
                 )
             )
         )
-    )
+    )*/
 }
