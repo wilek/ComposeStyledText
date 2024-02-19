@@ -8,6 +8,8 @@ import androidx.annotation.FloatRange
 import androidx.annotation.FontRes
 import androidx.annotation.PluralsRes
 import androidx.annotation.StringRes
+import androidx.annotation.StyleRes
+import androidx.annotation.StyleableRes
 import com.example.myapplication.ui.string.combine.TextCombine.TextSource.FromString
 import com.example.myapplication.ui.string.combine.TextCombine.TextSource.FromStringPluralResource
 import com.example.myapplication.ui.string.combine.TextCombine.TextSource.FromStringResource
@@ -38,6 +40,7 @@ import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.Charact
 import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.CharacterStyle.MaskFilter
 import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.CharacterStyle.Style
 import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.CharacterStyle.Strikethrough
+import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.CharacterStyle.TextAppearance
 import com.example.myapplication.ui.string.combine.TextCombine.TextAlignmentType
 import com.example.myapplication.ui.string.combine.TextCombine.DimensionValue
 import com.example.myapplication.ui.string.combine.TextCombine.ColorSource
@@ -207,25 +210,23 @@ class SpanBuilder: SpanBuilderContext {
         spans.add(Superscript)
     }
 
-    /*
-    text apperance missing
-     */
+    fun textAppearance(@StyleRes appearanceResId: Int, builder: (TextAppearanceBuilder.() -> Unit)? = null) {
+        val spanBuilder = builder?.let { TextAppearanceBuilder().apply(it) }
+        spans.add(TextAppearance(appearanceResId = appearanceResId, colorListResId = spanBuilder?.colorListResId ?: -1))
+
+    }
 
     fun typeface(typeface: TypefaceSource) {
         spans.add(Typeface(typeface = typeface))
     }
 
     fun underline() {
-        spans.add(StyleSpan.CharacterStyle.Underline)
+        spans.add(Underline)
     }
-
-
 
     fun alignment(alignment: TextAlignmentType) {
         spans.add(Alignment(alignment = alignment))
     }
-
-
 
     fun bullet(builder: (BulletSpanBuilder.() -> Unit)? = null) {
         val spanBuilder = builder?.let { BulletSpanBuilder().apply(it) }
@@ -258,20 +259,6 @@ class SpanBuilder: SpanBuilderContext {
         spans.add(TabStop(offset = offset))
     }
 
-    fun boldItalic() {
-        //spans.add(TextSpan.CharacterStyle.BoldItalic)
-    }
-
-    fun italic() {
-        //spans.add(TextSpan.CharacterStyle.Italic)
-    }
-
-
-
-
-
-
-
     fun build(): List<StyleSpan> {
         return spans
     }
@@ -288,7 +275,7 @@ class LeadingImageSpanBuilder {
         size = Size(width = sizeBuilder.width, height = sizeBuilder.height)
     }
 
-    fun margin(builder: (@TextCombineDsl MarginBuilder) .() -> Unit) {
+    fun margin(builder: (@TextCombineDsl MarginBuilder).() -> Unit) {
         val marginBuilder = MarginBuilder().apply(builder)
         margin = Margin(start = marginBuilder.start, top = marginBuilder.top, bottom = marginBuilder.bottom, end = marginBuilder.end)
     }
@@ -339,6 +326,11 @@ class QuoteSpanBuilder: SpanBuilderContext {
     var color: ColorSource? = null
     var stripeWidth: DimensionValue? = null
     var gapWidth: DimensionValue? = null
+}
+
+class TextAppearanceBuilder {
+
+    @StyleableRes var colorListResId: Int? = null
 }
 
 fun SpanBuilderContext.colorFromString(hexColor: String): ColorSource {

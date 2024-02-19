@@ -20,9 +20,17 @@ import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.Charact
 import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.CharacterStyle.Style
 import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.CharacterStyle.Subscript
 import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.CharacterStyle.Superscript
+import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.CharacterStyle.TextAppearance
 import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.CharacterStyle.Typeface
 import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.CharacterStyle.Underline
 import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.ParagraphStyle.Alignment
+import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.ParagraphStyle.Bullet
+import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.ParagraphStyle.LeadingImage
+import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.ParagraphStyle.LeadingMargin
+import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.ParagraphStyle.LineBackground
+import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.ParagraphStyle.LineHeight
+import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.ParagraphStyle.Quote
+import com.example.myapplication.ui.string.combine.TextCombine.StyleSpan.ParagraphStyle.TabStop
 import com.example.myapplication.ui.string.combine.TextCombine.TextAlignmentType
 import com.example.myapplication.ui.string.combine.TextCombine.TextSource.FromString
 import com.example.myapplication.ui.string.combine.TextCombine.TextSource.FromStringPluralResource
@@ -477,6 +485,33 @@ internal class TextCombineDSLBuilderTest {
     }
 
     @Test
+    fun `should build text with text appearance  span`() {
+        // given
+        val stringCombine = stringCombine {
+            appendString(text = "String text") {
+                setSpans {
+                    textAppearance(appearanceResId = 1) {
+                        colorListResId = 2
+                    }
+                }
+            }
+        }
+
+        // then
+        assertEquals(
+            TextCombine(
+                texts = listOf(
+                    TextCombine.TextValue(
+                        source = FromString(text = "String text"),
+                        spans = listOf(TextAppearance(appearanceResId = 1, colorListResId = 2))
+                    )
+                )
+            ),
+            stringCombine
+        )
+    }
+
+    @Test
     fun `should build text with typeface span`() {
         // given
         val stringCombine = stringCombine {
@@ -528,7 +563,7 @@ internal class TextCombineDSLBuilderTest {
 
 
     @Test
-    fun should_build_text_with_alignment_span() {
+    fun `should build text with alignment span`() {
         // given
         val stringCombine = stringCombine {
             appendString(text = "String text") {
@@ -545,6 +580,227 @@ internal class TextCombineDSLBuilderTest {
                     TextCombine.TextValue(
                         source = FromString(text = "String text"),
                         spans = listOf(Alignment(alignment = TextAlignmentType.ALIGN_NORMAL))
+                    )
+                )
+            ),
+            stringCombine
+        )
+    }
+
+    @Test
+    fun `should build text with bullet span`() {
+        // given
+        val stringCombine = stringCombine {
+            appendString(text = "String text") {
+                setSpans {
+                    bullet {
+                        gapWidth = dimensionFromPx(value = 1)
+                        color = colorFromInt(color = 1)
+                        radius = dimensionFromPx(value = 2)
+                    }
+                }
+            }
+        }
+
+        // then
+        assertEquals(
+            TextCombine(
+                texts = listOf(
+                    TextCombine.TextValue(
+                        source = FromString(text = "String text"),
+                        spans = listOf(
+                            Bullet(
+                                gapWidth = DimensionValue.FromPx(value = 1),
+                                color = ColorSource.FromInt(color = 1),
+                                radius = DimensionValue.FromPx(value = 2)
+                            )
+                        )
+                    )
+                )
+            ),
+            stringCombine
+        )
+    }
+
+    @Test
+    fun `should build text with leading image span`() {
+        // given
+        val stringCombine = stringCombine {
+            appendString(text = "String text") {
+                setSpans {
+                    leadingImage(image = imageFromDrawable(drawableResId = 1)) {
+                        size {
+                            width = dimensionFromPx(value = 2)
+                            height = dimensionFromPx(value = 3)
+                        }
+                        margin {
+                            start = dimensionFromPx(value = 4)
+                            top = dimensionFromPx(value = 5)
+                            bottom = dimensionFromPx(value = 6)
+                            end = dimensionFromPx(value = 7)
+
+                        }
+                    }
+                }
+            }
+        }
+
+        // then
+        assertEquals(
+            TextCombine(
+                texts = listOf(
+                    TextCombine.TextValue(
+                        source = FromString(text = "String text"),
+                        spans = listOf(
+                            LeadingImage(
+                                image = ImageSource.FromDrawable(drawableResId = 1),
+                                size = Size(
+                                    width = DimensionValue.FromPx(value = 2),
+                                    height = DimensionValue.FromPx(value = 3)
+                                ),
+                                margin = Margin(
+                                    start = DimensionValue.FromPx(value = 4),
+                                    top = DimensionValue.FromPx(value = 5),
+                                    bottom = DimensionValue.FromPx(value = 6),
+                                    end = DimensionValue.FromPx(value = 7)
+                                )
+                            )
+                        )
+                    )
+                )
+            ),
+            stringCombine
+        )
+    }
+
+    @Test
+    fun `should build text with leading margin span`() {
+        // given
+        val stringCombine = stringCombine {
+            appendString(text = "String text") {
+                setSpans {
+                    leadingMargin(first = 1, rest = 2)
+                }
+            }
+        }
+
+        // then
+        assertEquals(
+            TextCombine(
+                texts = listOf(
+                    TextCombine.TextValue(
+                        source = FromString(text = "String text"),
+                        spans = listOf(LeadingMargin(first = 1, rest = 2))
+                    )
+                )
+            ),
+            stringCombine
+        )
+    }
+
+    @Test
+    fun `should build text with line background span`() {
+        // given
+        val stringCombine = stringCombine {
+            appendString(text = "String text") {
+                setSpans {
+                    lineBackground(color = colorFromInt(color = 1))
+                }
+            }
+        }
+
+        // then
+        assertEquals(
+            TextCombine(
+                texts = listOf(
+                    TextCombine.TextValue(
+                        source = FromString(text = "String text"),
+                        spans = listOf(LineBackground(color = ColorSource.FromInt(color = 1)))
+                    )
+                )
+            ),
+            stringCombine
+        )
+    }
+
+    @Test
+    fun `should build text with line height span`() {
+        // given
+        val stringCombine = stringCombine {
+            appendString(text = "String text") {
+                setSpans {
+                    lineHeight(height = dimensionFromPx(value = 1))
+                }
+            }
+        }
+
+        // then
+        assertEquals(
+            TextCombine(
+                texts = listOf(
+                    TextCombine.TextValue(
+                        source = FromString(text = "String text"),
+                        spans = listOf(LineHeight(height = DimensionValue.FromPx(value = 1)))
+                    )
+                )
+            ),
+            stringCombine
+        )
+    }
+
+    @Test
+    fun `should build text with quote span`() {
+        // given
+        val stringCombine = stringCombine {
+            appendString(text = "String text") {
+                setSpans {
+                    quote {
+                        color = colorFromInt(color = 1)
+                        stripeWidth = dimensionFromPx(value = 1)
+                        gapWidth = dimensionFromPx(value = 2)
+                    }
+                }
+            }
+        }
+
+        // then
+        assertEquals(
+            TextCombine(
+                texts = listOf(
+                    TextCombine.TextValue(
+                        source = FromString(text = "String text"),
+                        spans = listOf(
+                            Quote(
+                                color = ColorSource.FromInt(color = 1),
+                                stripeWidth = DimensionValue.FromPx(value = 1),
+                                gapWidth = DimensionValue.FromPx(value = 2)
+                            )
+                        )
+                    )
+                )
+            ),
+            stringCombine
+        )
+    }
+
+    @Test
+    fun `should build text with tab stop span`() {
+        // given
+        val stringCombine = stringCombine {
+            appendString(text = "String text") {
+                setSpans {
+                    tabStop(offset = dimensionFromPx(value = 1))
+                }
+            }
+        }
+
+        // then
+        assertEquals(
+            TextCombine(
+                texts = listOf(
+                    TextCombine.TextValue(
+                        source = FromString(text = "String text"),
+                        spans = listOf(TabStop(offset = DimensionValue.FromPx(value = 1)))
                     )
                 )
             ),

@@ -47,11 +47,20 @@ data class TextCombine(val texts: List<TextValue>) {
             data class ScaleX(@FloatRange(from = 0.0) val proportion: Float) : CharacterStyle()
 
             object Strikethrough : CharacterStyle()
+
             data class Style(val typefaceStyle: TypefaceStyle) : CharacterStyle()
+
             object Subscript : CharacterStyle()
+
             object Superscript : CharacterStyle()
-            data class TextAppearance(val type: TextAppearanceType) : CharacterStyle()
+
+            data class TextAppearance(
+                @StyleRes val appearanceResId: Int,
+                @StyleableRes val colorListResId: Int = -1
+            ) : CharacterStyle()
+
             data class Typeface(val typeface: TypefaceSource) : CharacterStyle()
+
             object Underline : CharacterStyle()
         }
 
