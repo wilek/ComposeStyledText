@@ -32,13 +32,11 @@ android {
     }
 }
 
-
 tasks.withType<Test> {
     useJUnitPlatform()
 }
 
 dependencies {
-
     implementation(libs.androidx.annotation)
     implementation(libs.androidx.appcompact.resources)
 
@@ -46,5 +44,4 @@ dependencies {
 
     testImplementation(libs.junit5.core)
     testImplementation(libs.mockito.kotlin)
-
 }
