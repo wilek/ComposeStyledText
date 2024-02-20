@@ -26,6 +26,7 @@ import android.text.Spanned
 import android.text.style.LeadingMarginSpan
 import androidx.annotation.ColorInt
 import androidx.annotation.Px
+import eu.wilek.textcombine.TextCombine.DimensionValue
 import eu.wilek.textcombine.TextCombine.StyleSpan.ParagraphStyle.Bullet
 import eu.wilek.textcombine.renderer.span.SpanRenderer
 import eu.wilek.textcombine.util.toColor
@@ -35,15 +36,15 @@ open class BulletSpanRenderer(private val context: Context) : SpanRenderer<Bulle
 
     override fun renderSpan(styleSpan: Bullet): Any {
         return BulletPointSpan(
-            gapWidth = styleSpan.gapWidth?.toPx(context = context) ?: DEFAULT_GAP_WIDTH,
-            bulletRadius = styleSpan.radius?.toPx(context = context) ?: DEFAULT_BULLET_RADIUS,
+            gapWidth = (styleSpan.gapWidth ?: DEFAULT_GAP_WIDTH).toPx(context = context),
+            bulletRadius = (styleSpan.radius ?: DEFAULT_BULLET_RADIUS).toPx(context = context),
             bulletColor = styleSpan.color?.toColor(context = context) ?: Color.BLACK
         )
     }
 
     private companion object {
-        const val DEFAULT_GAP_WIDTH = 8
-        const val DEFAULT_BULLET_RADIUS = 16
+        val DEFAULT_GAP_WIDTH = DimensionValue.FromDp(value = 8)
+        val DEFAULT_BULLET_RADIUS = DimensionValue.FromDp(value = 4)
     }
 
     private class BulletPointSpan(
