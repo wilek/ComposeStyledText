@@ -1,6 +1,5 @@
 package eu.wilek.textcombine
 
-import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.DimenRes
@@ -29,7 +28,7 @@ data class TextCombine(val texts: List<TextValue>) {
 
     sealed class StyleSpan {
         sealed class CharacterStyle : StyleSpan() {
-            data class AbsoluteSize(val size: DimensionValue): CharacterStyle()
+            data class AbsoluteSize(val size: DimensionValue) : CharacterStyle()
             data class BackgroundColor(val color: ColorSource) : CharacterStyle()
             data class Clickable(val onClick: (id: String?) -> Unit, val id: String? = null) : CharacterStyle()
             data class ForegroundColor(val color: ColorSource) : CharacterStyle()
@@ -38,21 +37,21 @@ data class TextCombine(val texts: List<TextValue>) {
                 val alignType: ImageAlignType,
                 val size: Size? = null,
                 val margin: Margin? = null
-            ): CharacterStyle()
+            ) : CharacterStyle()
 
-            data class MaskFilter(val filterType: MaskFilterType): CharacterStyle()
+            data class MaskFilter(val filterType: MaskFilterType) : CharacterStyle()
 
             data class RelativeSize(@FloatRange(from = 0.0) val proportion: Float) : CharacterStyle()
 
             data class ScaleX(@FloatRange(from = 0.0) val proportion: Float) : CharacterStyle()
 
-            object Strikethrough : CharacterStyle()
+            data object Strikethrough : CharacterStyle()
 
             data class Style(val typefaceStyle: TypefaceStyle) : CharacterStyle()
 
-            object Subscript : CharacterStyle()
+            data object Subscript : CharacterStyle()
 
-            object Superscript : CharacterStyle()
+            data object Superscript : CharacterStyle()
 
             data class TextAppearance(
                 @StyleRes val appearanceResId: Int,
@@ -61,31 +60,35 @@ data class TextCombine(val texts: List<TextValue>) {
 
             data class Typeface(val typeface: TypefaceSource) : CharacterStyle()
 
-            object Underline : CharacterStyle()
+            data object Underline : CharacterStyle()
+
+
         }
 
         sealed class ParagraphStyle : StyleSpan() {
-            data class Alignment(val alignment: TextAlignmentType): ParagraphStyle()
+            data class Alignment(val alignment: TextAlignmentType) : ParagraphStyle()
             data class Bullet(
                 val gapWidth: DimensionValue? = null,
                 val color: ColorSource? = null,
                 val radius: DimensionValue? = null
             ) : ParagraphStyle()
+
             data class LeadingImage(
                 val image: ImageSource,
                 val size: Size? = null,
                 val margin: Margin? = null
             ) : ParagraphStyle()
 
-            data class LeadingMargin(val first: Int, val rest: Int): ParagraphStyle()
-            data class LineBackground(val color: ColorSource): ParagraphStyle()
-            data class LineHeight(val height: DimensionValue): ParagraphStyle()
+            data class LeadingMargin(val first: Int, val rest: Int) : ParagraphStyle()
+            data class LineBackground(val color: ColorSource) : ParagraphStyle()
+            data class LineHeight(val height: DimensionValue) : ParagraphStyle()
             data class Quote(
                 val color: ColorSource? = null,
                 val stripeWidth: DimensionValue? = null,
                 val gapWidth: DimensionValue? = null
             ) : ParagraphStyle()
-            data class TabStop(val offset: DimensionValue): ParagraphStyle()
+
+            data class TabStop(val offset: DimensionValue) : ParagraphStyle()
         }
     }
 
@@ -96,8 +99,8 @@ data class TextCombine(val texts: List<TextValue>) {
     }
 
     sealed class ImageSource {
-        data class FromBitmap(val bitmapSource: BitmapSource): ImageSource()
-        data class FromDrawable(@DrawableRes val drawableResId: Int): ImageSource()
+        data class FromBitmap(val bitmapSource: BitmapSource) : ImageSource()
+        data class FromDrawable(@DrawableRes val drawableResId: Int) : ImageSource()
     }
 
     sealed class BitmapSource {
@@ -150,23 +153,6 @@ data class TextCombine(val texts: List<TextValue>) {
     sealed class MaskFilterType {
         data class Blur(val blurType: BlurType, @FloatRange(from = 0.0) val radius: Float) : MaskFilterType()
     }
-
-    sealed class TextAppearanceType {
-        data class FromResources(
-            @StyleRes val appearanceResId: Int,
-            @StyleableRes val colorListResId: Int = -1
-        ) : TextAppearanceType()
-
-        data class FromSpecified(
-            val typefaceFamily: String,
-            val typefaceStyle: TypefaceStyle,
-            val textSize: DimensionValue,
-            val textColor: List<ColorState>,
-            val textLinkColor: List<ColorState>
-        ) : TextAppearanceType()
-    }
-
-    sealed class ColorState(@AttrRes val stateResIds: IntArray, val color: ColorSource)
 
     sealed class TypefaceSource {
         data class FromAssets(val fileName: String) : TypefaceSource()
