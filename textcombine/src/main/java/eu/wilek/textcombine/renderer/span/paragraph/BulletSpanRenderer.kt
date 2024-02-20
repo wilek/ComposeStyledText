@@ -26,7 +26,6 @@ import android.text.Spanned
 import android.text.style.LeadingMarginSpan
 import androidx.annotation.ColorInt
 import androidx.annotation.Px
-import androidx.core.graphics.withTranslation
 import eu.wilek.textcombine.TextCombine.StyleSpan.ParagraphStyle.Bullet
 import eu.wilek.textcombine.renderer.span.SpanRenderer
 import eu.wilek.textcombine.util.toColor
@@ -79,12 +78,12 @@ open class BulletSpanRenderer(private val context: Context) : SpanRenderer<Bulle
                     if (canvas.isHardwareAccelerated) {
                         bulletPath.addCircle(0.0f, 0.0f, DEFAULT_BULLET_RADIUS.toFloat(), Path.Direction.CW)
 
-                        canvas.withTranslation(
+                        /*canvas.withTranslation(
                             getCircleXLocation(currentMarginLocation, paragraphDirection),
                             getCircleYLocation(lineTop, lineBottom)
                         ) {
                             drawPath(bulletPath, paint)
-                        }
+                        }*/
                     } else {
                         canvas.drawCircle(
                             getCircleXLocation(currentMarginLocation, paragraphDirection),
