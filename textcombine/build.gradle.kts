@@ -42,15 +42,10 @@ dependencies {
     implementation(libs.androidx.annotation)
     implementation(libs.androidx.appcompact.resources)
 
-    testRuntimeOnly(libs.junit5.engine.vintage)
+    testRuntimeOnly(libs.junit5.engine.jupiter)
 
     testImplementation(libs.junit)
     testImplementation(libs.junit5.core)
-
-    //testImplementation("androidx.test:core:1.5.0")
-    testImplementation("androidx.test.ext:junit-ktx:1.1.5")
-
-    //testImplementation("org.robolectric:robolectric:4.10.2")
     testImplementation(libs.mockito.kotlin)
 
 }

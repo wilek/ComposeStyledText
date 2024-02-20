@@ -7,7 +7,7 @@ import eu.wilek.textcombine.TextCombine.StyleSpan.ParagraphStyle.Quote
 import eu.wilek.textcombine.TextCombine.TextSource.FromString
 import eu.wilek.textcombine.renderer.TextCombineRenderer
 import eu.wilek.textcombine.renderer.TextCombineRenderer.PhraseSpan
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 
