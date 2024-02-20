@@ -44,7 +44,6 @@ dependencies {
 
     testRuntimeOnly(libs.junit5.engine.jupiter)
 
-    testImplementation(libs.junit)
     testImplementation(libs.junit5.core)
     testImplementation(libs.mockito.kotlin)
 
