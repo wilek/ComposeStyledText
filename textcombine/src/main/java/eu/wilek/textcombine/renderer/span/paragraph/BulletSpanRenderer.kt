@@ -77,13 +77,13 @@ open class BulletSpanRenderer(private val context: Context) : SpanRenderer<Bulle
                 paint.withCustomColor {
                     if (canvas.isHardwareAccelerated) {
                         bulletPath.addCircle(0.0f, 0.0f, DEFAULT_BULLET_RADIUS.toFloat(), Path.Direction.CW)
-
-                        /*canvas.withTranslation(
+                        val save = canvas.save()
+                        canvas.translate(
                             getCircleXLocation(currentMarginLocation, paragraphDirection),
                             getCircleYLocation(lineTop, lineBottom)
-                        ) {
-                            drawPath(bulletPath, paint)
-                        }*/
+                        )
+                        canvas.drawPath(bulletPath, paint)
+                        canvas.restoreToCount(save)
                     } else {
                         canvas.drawCircle(
                             getCircleXLocation(currentMarginLocation, paragraphDirection),
