@@ -42,8 +42,8 @@ open class BulletSpanRenderer(private val context: Context) : SpanRenderer<Bulle
     }
 
     private companion object {
-        const val DEFAULT_GAP_WIDTH = 2
-        const val DEFAULT_BULLET_RADIUS = 15
+        const val DEFAULT_GAP_WIDTH = 8
+        const val DEFAULT_BULLET_RADIUS = 16
     }
 
     private class BulletPointSpan(
@@ -76,7 +76,7 @@ open class BulletSpanRenderer(private val context: Context) : SpanRenderer<Bulle
             if ((text as Spanned).getSpanStart(this) == lineStart) {
                 paint.withCustomColor {
                     if (canvas.isHardwareAccelerated) {
-                        bulletPath.addCircle(0.0f, 0.0f, DEFAULT_BULLET_RADIUS.toFloat(), Path.Direction.CW)
+                        bulletPath.addCircle(0f, 0.0f, bulletRadius.toFloat(), Path.Direction.CW)
                         val save = canvas.save()
                         canvas.translate(
                             getCircleXLocation(currentMarginLocation, paragraphDirection),
@@ -101,7 +101,7 @@ open class BulletSpanRenderer(private val context: Context) : SpanRenderer<Bulle
         }
 
         private fun getCircleXLocation(currentMarginLocation: Int, paragraphDirection: Int): Float {
-            return gapWidth + currentMarginLocation + paragraphDirection * bulletRadius.toFloat()
+            return currentMarginLocation + paragraphDirection * bulletRadius.toFloat()
         }
 
         private inline fun Paint.withCustomColor(block: () -> Unit) {
