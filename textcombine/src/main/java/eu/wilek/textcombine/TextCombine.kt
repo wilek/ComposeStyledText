@@ -118,7 +118,7 @@ data class TextCombine(val texts: List<TextValue>, val spans: List<StyleSpan> = 
     sealed class DimensionValue {
         data class FromPx(@Dimension(unit = Dimension.PX) val value: Int) : DimensionValue()
         data class FromDp(@Dimension(unit = Dimension.DP) val value: Int) : DimensionValue()
-        data class FromSp(@Dimension(unit = Dimension.SP) val value: Float) : DimensionValue()
+        data class FromSp(@Dimension(unit = Dimension.SP) val value: Int) : DimensionValue()
         data class FromResource(@DimenRes val dimenResId: Int) : DimensionValue()
     }
 
