@@ -3,6 +3,8 @@ package eu.wilek.textcombine.renderer
 import android.content.Context
 import android.content.res.Resources
 import eu.wilek.textcombine.TextCombine
+import eu.wilek.textcombine.TextCombine.StyleSpan.CharacterStyle.Underline
+import eu.wilek.textcombine.TextCombine.StyleSpan.ParagraphStyle.Quote
 import eu.wilek.textcombine.TextCombine.TextSource.FromString
 import eu.wilek.textcombine.TextCombine.TextSource.FromStringPluralResource
 import eu.wilek.textcombine.TextCombine.TextSource.FromStringResource
@@ -18,6 +20,7 @@ import org.mockito.kotlin.doAnswer
 import org.mockito.kotlin.eq
 import org.mockito.kotlin.given
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
 import org.mockito.kotlin.willReturn
 
 internal class TextCombineRendererTest {
@@ -233,6 +236,172 @@ internal class TextCombineRendererTest {
         assertEquals(
             "What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
             text
+        )
+    }
+
+    @Test
+    fun `should apply span for text combine`() {
+        // given
+        val textCombine = TextCombine(
+            texts = listOf(
+                TextValue(
+                    text = FromString("Paragraph one"),
+                    spans = listOf(Quote())
+                )
+            )
+        )
+
+        // when
+        textCombineRenderer.render(textCombine = textCombine)
+
+        // then
+        verify(spanCreator).createSpan(
+            context = context,
+            text = "Paragraph one",
+            textSpans = listOf(
+                TextCombineRenderer.PhraseSpan(
+                    start = 0,
+                    end = 13,
+                    spans = listOf(Quote())
+                )
+            )
+        )
+    }
+
+    @Test
+    fun `should apply span for multiple text combine`() {
+        // given
+        val textCombine = TextCombine(
+            texts = listOf(
+                TextValue(
+                    text = FromString("Paragraph one"),
+                    spans = listOf(Quote())
+                ),
+                TextValue(
+                    text = FromString("\n")
+                ),
+                TextValue(
+                    text = FromString("Paragraph two"),
+                    spans = listOf(Quote())
+                )
+            )
+        )
+
+        // when
+        textCombineRenderer.render(textCombine = textCombine)
+
+        // then
+        verify(spanCreator).createSpan(
+            context = context,
+            text = "Paragraph one\nParagraph two",
+            textSpans = listOf(
+                TextCombineRenderer.PhraseSpan(start = 0, end = 13, spans = listOf(Quote())),
+                TextCombineRenderer.PhraseSpan(start = 14, end = 27, spans = listOf(Quote()))
+            )
+        )
+    }
+
+    @Test
+    fun `should apply span for multiple text combine with format arguments`() {
+        // given
+        val textCombine = TextCombine(
+            texts = listOf(
+                TextValue(
+                    text = FromString("Paragraph %s"),
+                    spans = listOf(Quote()),
+                    formatArgs = listOf(
+                        TextValue(
+                            text = FromString("one"),
+                            spans = listOf(Underline)
+                        )
+                    )
+                ),
+                TextValue(
+                    text = FromString("\n")
+                ),
+                TextValue(
+                    text = FromString("Paragraph two"),
+                    spans = listOf(Quote())
+                )
+            )
+        )
+
+        // when
+        textCombineRenderer.render(textCombine = textCombine)
+
+        // then
+        verify(spanCreator).createSpan(
+            context = context,
+            text = "Paragraph one\nParagraph two",
+            textSpans = listOf(
+                TextCombineRenderer.PhraseSpan(start = 0, end = 13, spans = listOf(Quote())),
+                TextCombineRenderer.PhraseSpan(
+                    start = 10,
+                    end = 13,
+                    spans = listOf(Underline)
+                ),
+                TextCombineRenderer.PhraseSpan(start = 14, end = 27, spans = listOf(Quote()))
+            )
+        )
+    }
+
+    @Test
+    fun `should apply main span for text combine`() {
+        // given
+        val textCombine = TextCombine(
+            texts = listOf(TextValue(text = FromString("Paragraph one"))),
+            spans = listOf(Quote())
+        )
+
+        // when
+        textCombineRenderer.render(textCombine = textCombine)
+
+        // then
+        verify(spanCreator).createSpan(
+            context = context,
+            text = "Paragraph one",
+            textSpans = listOf(
+                TextCombineRenderer.PhraseSpan(
+                    start = 0,
+                    end = 13,
+                    spans = listOf(Quote())
+                )
+            )
+        )
+    }
+
+    @Test
+    fun `should apply main and sibling spans for text combine`() {
+        // given
+        val textCombine = TextCombine(
+            texts = listOf(
+                TextValue(
+                    text = FromString("Paragraph one"),
+                    spans = listOf(Underline)
+                )
+            ),
+            spans = listOf(Quote())
+        )
+
+        // when
+        textCombineRenderer.render(textCombine = textCombine)
+
+        // then
+        verify(spanCreator).createSpan(
+            context = context,
+            text = "Paragraph one",
+            textSpans = listOf(
+                TextCombineRenderer.PhraseSpan(
+                    start = 0,
+                    end = 13,
+                    spans = listOf(Quote())
+                ),
+                TextCombineRenderer.PhraseSpan(
+                    start = 0,
+                    end = 13,
+                    spans = listOf(Underline)
+                )
+            )
         )
     }
 }

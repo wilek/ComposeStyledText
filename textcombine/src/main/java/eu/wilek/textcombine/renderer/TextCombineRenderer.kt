@@ -26,10 +26,13 @@ class TextCombineRenderer(
                 diffSpan += phrase.text.length
                 updatedPhrase
             }
-            .create()
+            .mergePhrases()
+            .appendMainSpans(spans = textCombine.spans)
+            .let { createSpannedText(text = it.text, spans = it.spans) }
+
     }
 
-    private fun readTextValue(textValue: TextValue) = when (val source = textValue.source) {
+    private fun readTextValue(textValue: TextValue) = when (val source = textValue.text) {
         is FromString -> source.readString(formatArgs = textValue.formatArgs, spans = textValue.spans)
         is FromStringResource -> source.readString(formatArgs = textValue.formatArgs, spans = textValue.spans)
         is FromStringPluralResource -> source.readString(formatArgs = textValue.formatArgs, spans = textValue.spans)
@@ -99,19 +102,24 @@ class TextCombineRenderer(
 
     private fun createSpannedText(
         text: CharSequence,
-        textSpans: List<PhraseSpan>
+        spans: List<PhraseSpan>,
     ): CharSequence {
-        return spanCreator.createSpan(context = context, text = text, textSpans = textSpans)
+        return spanCreator.createSpan(context = context, text = text, textSpans = spans)
     }
 
     private fun Phrase.moveSpansBy(size: Int) = copy(
         spans = spans.map { span -> span.copy(start = span.start + size, end = span.end + size) }
     )
 
-    private fun List<Phrase>.create() = createSpannedText(
+    private fun List<Phrase>.mergePhrases() = Phrase(
         text = joinToString(separator = "") { it.text },
-        textSpans = flatMap { text -> text.spans }
+        spans = flatMap { text -> text.spans }
     )
+
+    private fun Phrase.appendMainSpans(spans: List<TextCombine.StyleSpan>) = when {
+        spans.isEmpty() -> this
+        else -> copy(spans = listOf(PhraseSpan(start = 0, end = text.length, spans = spans)) + this.spans)
+    }
 
     private companion object {
         val STRING_FORMAT_REGEXP = "%s|%\\d+\\$?s".toRegex()
