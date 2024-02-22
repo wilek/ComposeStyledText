@@ -23,7 +23,7 @@ internal class DefaultSpannableCreatorTest {
         val textCombine = TextCombine(
             texts = listOf(
                 TextCombine.TextValue(
-                    source = FromString("Paragraph one"),
+                    text = FromString("Paragraph one"),
                     spans = listOf(Quote())
                 )
             )
@@ -46,14 +46,14 @@ internal class DefaultSpannableCreatorTest {
         val textCombine = TextCombine(
             texts = listOf(
                 TextCombine.TextValue(
-                    source = FromString("Paragraph one"),
+                    text = FromString("Paragraph one"),
                     spans = listOf(Quote())
                 ),
                 TextCombine.TextValue(
-                    source = FromString("\n")
+                    text = FromString("\n")
                 ),
                 TextCombine.TextValue(
-                    source = FromString("Paragraph two"),
+                    text = FromString("Paragraph two"),
                     spans = listOf(Quote())
                 )
             )
@@ -79,20 +79,20 @@ internal class DefaultSpannableCreatorTest {
         val textCombine = TextCombine(
             texts = listOf(
                 TextCombine.TextValue(
-                    source = FromString("Paragraph %s"),
+                    text = FromString("Paragraph %s"),
                     spans = listOf(Quote()),
                     formatArgs = listOf(
                         TextCombine.TextValue(
-                            source = FromString("one"),
+                            text = FromString("one"),
                             spans = listOf(Underline)
                         )
                     )
                 ),
                 TextCombine.TextValue(
-                    source = FromString("\n")
+                    text = FromString("\n")
                 ),
                 TextCombine.TextValue(
-                    source = FromString("Paragraph two"),
+                    text = FromString("Paragraph two"),
                     spans = listOf(Quote())
                 )
             )

@@ -12,10 +12,10 @@ import androidx.annotation.StringRes
 import androidx.annotation.StyleRes
 import androidx.annotation.StyleableRes
 
-data class TextCombine(val texts: List<TextValue>) {
+data class TextCombine(val texts: List<TextValue>, val spans: List<StyleSpan> = emptyList()) {
 
     data class TextValue(
-        val source: TextSource,
+        val text: TextSource,
         val formatArgs: List<TextValue> = emptyList(),
         val spans: List<StyleSpan> = emptyList()
     )
@@ -61,8 +61,6 @@ data class TextCombine(val texts: List<TextValue>) {
             data class Typeface(val typeface: TypefaceSource) : CharacterStyle()
 
             data object Underline : CharacterStyle()
-
-
         }
 
         sealed class ParagraphStyle : StyleSpan() {

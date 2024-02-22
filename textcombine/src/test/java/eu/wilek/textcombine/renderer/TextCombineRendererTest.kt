@@ -45,12 +45,12 @@ internal class TextCombineRendererTest {
         val textCombine = TextCombine(
             texts = listOf(
                 TextValue(
-                    source = FromString("Lorem %1\$s is simply %2\$s text of the %3\$s and %4\$s industry."),
+                    text = FromString("Lorem %1\$s is simply %2\$s text of the %3\$s and %4\$s industry."),
                     formatArgs = listOf(
-                        TextValue(source = FromString("Ipsum")),
-                        TextValue(source = FromString("dummy")),
-                        TextValue(source = FromString("printing")),
-                        TextValue(source = FromString("typesetting"))
+                        TextValue(text = FromString("Ipsum")),
+                        TextValue(text = FromString("dummy")),
+                        TextValue(text = FromString("printing")),
+                        TextValue(text = FromString("typesetting"))
                     )
                 )
             )
@@ -69,15 +69,15 @@ internal class TextCombineRendererTest {
         val textCombine = TextCombine(
             texts = listOf(
                 TextValue(
-                    source = FromString("What is Lorem Ipsum? %1\$s"),
+                    text = FromString("What is Lorem Ipsum? %1\$s"),
                     formatArgs = listOf(
                         TextValue(
-                            source = FromString("Lorem %1\$s is simply %2\$s text of the %3\$s and %4\$s industry."),
+                            text = FromString("Lorem %1\$s is simply %2\$s text of the %3\$s and %4\$s industry."),
                             formatArgs = listOf(
-                                TextValue(source = FromString("Ipsum")),
-                                TextValue(source = FromString("dummy")),
-                                TextValue(source = FromString("printing")),
-                                TextValue(source = FromString("typesetting"))
+                                TextValue(text = FromString("Ipsum")),
+                                TextValue(text = FromString("dummy")),
+                                TextValue(text = FromString("printing")),
+                                TextValue(text = FromString("typesetting"))
                             )
                         )
                     )
@@ -106,12 +106,12 @@ internal class TextCombineRendererTest {
         val textCombine = TextCombine(
             texts = listOf(
                 TextValue(
-                    source = FromStringResource(stringResId = 1),
+                    text = FromStringResource(stringResId = 1),
                     formatArgs = listOf(
-                        TextValue(source = FromStringResource(stringResId = 2)),
-                        TextValue(source = FromStringResource(stringResId = 3)),
-                        TextValue(source = FromStringResource(stringResId = 4)),
-                        TextValue(source = FromStringResource(stringResId = 5))
+                        TextValue(text = FromStringResource(stringResId = 2)),
+                        TextValue(text = FromStringResource(stringResId = 3)),
+                        TextValue(text = FromStringResource(stringResId = 4)),
+                        TextValue(text = FromStringResource(stringResId = 5))
                     )
                 )
             )
@@ -136,15 +136,15 @@ internal class TextCombineRendererTest {
         val textCombine = TextCombine(
             texts = listOf(
                 TextValue(
-                    source = FromStringResource(stringResId = 1),
+                    text = FromStringResource(stringResId = 1),
                     formatArgs = listOf(
                         TextValue(
-                            source = FromStringResource(stringResId = 2),
+                            text = FromStringResource(stringResId = 2),
                             formatArgs = listOf(
-                                TextValue(source = FromStringResource(stringResId = 3)),
-                                TextValue(source = FromStringResource(stringResId = 4)),
-                                TextValue(source = FromStringResource(stringResId = 5)),
-                                TextValue(source = FromStringResource(stringResId = 6))
+                                TextValue(text = FromStringResource(stringResId = 3)),
+                                TextValue(text = FromStringResource(stringResId = 4)),
+                                TextValue(text = FromStringResource(stringResId = 5)),
+                                TextValue(text = FromStringResource(stringResId = 6))
                             )
                         )
                     )
@@ -178,12 +178,12 @@ internal class TextCombineRendererTest {
         val textCombine = TextCombine(
             texts = listOf(
                 TextValue(
-                    source = FromStringPluralResource(pluralResId = 1, count = 1),
+                    text = FromStringPluralResource(pluralResId = 1, count = 1),
                     formatArgs = listOf(
-                        TextValue(source = FromStringPluralResource(pluralResId = 2, count = 1)),
-                        TextValue(source = FromStringPluralResource(pluralResId = 3, count = 1)),
-                        TextValue(source = FromStringPluralResource(pluralResId = 4, count = 1)),
-                        TextValue(source = FromStringPluralResource(pluralResId = 5, count = 1))
+                        TextValue(text = FromStringPluralResource(pluralResId = 2, count = 1)),
+                        TextValue(text = FromStringPluralResource(pluralResId = 3, count = 1)),
+                        TextValue(text = FromStringPluralResource(pluralResId = 4, count = 1)),
+                        TextValue(text = FromStringPluralResource(pluralResId = 5, count = 1))
                     )
                 )
             )
@@ -210,15 +210,15 @@ internal class TextCombineRendererTest {
         val textCombine = TextCombine(
             texts = listOf(
                 TextValue(
-                    source = FromStringPluralResource(pluralResId = 1, count = 1),
+                    text = FromStringPluralResource(pluralResId = 1, count = 1),
                     formatArgs = listOf(
                         TextValue(
-                            source = FromStringPluralResource(pluralResId = 2, count = 1),
+                            text = FromStringPluralResource(pluralResId = 2, count = 1),
                             formatArgs = listOf(
-                                TextValue(source = FromStringPluralResource(pluralResId = 3, count = 1)),
-                                TextValue(source = FromStringPluralResource(pluralResId = 4, count = 1)),
-                                TextValue(source = FromStringPluralResource(pluralResId = 5, count = 1)),
-                                TextValue(source = FromStringPluralResource(pluralResId = 6, count = 1))
+                                TextValue(text = FromStringPluralResource(pluralResId = 3, count = 1)),
+                                TextValue(text = FromStringPluralResource(pluralResId = 4, count = 1)),
+                                TextValue(text = FromStringPluralResource(pluralResId = 5, count = 1)),
+                                TextValue(text = FromStringPluralResource(pluralResId = 6, count = 1))
                             )
                         )
                     )
