@@ -10,6 +10,7 @@ import android.graphics.drawable.InsetDrawable
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
+import androidx.annotation.ChecksSdkIntAtLeast
 import androidx.appcompat.content.res.AppCompatResources
 import eu.wilek.textcombine.TextCombine
 import eu.wilek.textcombine.TextCombine.BitmapSource
@@ -59,12 +60,10 @@ private fun Context.getBitmapFromAssets(bitmapFileName: String): Bitmap {
 }
 
 private fun Context.getBitmapFromUri(bitmapUri: String): Bitmap {
-    val contentResolver = contentResolver
     val uri = Uri.parse(bitmapUri)
-
     return when {
-        Build.VERSION.SDK_INT <= Build.VERSION_CODES.P -> MediaStore.Images.Media.getBitmap(contentResolver, uri)
-        else -> ImageDecoder.decodeBitmap(ImageDecoder.createSource(contentResolver, uri))
+        isAndroidP() -> ImageDecoder.decodeBitmap(ImageDecoder.createSource(contentResolver, uri))
+        else -> MediaStore.Images.Media.getBitmap(contentResolver, uri)
     }
 }
 
@@ -73,3 +72,6 @@ private fun Bitmap.toDrawable(context: Context): Drawable {
     recycle()
     return drawable
 }
+
+@ChecksSdkIntAtLeast(api = Build.VERSION_CODES.P)
+private fun isAndroidP() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.P
