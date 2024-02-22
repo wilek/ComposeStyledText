@@ -38,7 +38,7 @@ import eu.wilek.textcombine.TextCombine.TextSource.FromStringPluralResource
 import eu.wilek.textcombine.TextCombine.TextSource.FromStringResource
 import eu.wilek.textcombine.TextCombine.TypefaceSource
 import eu.wilek.textcombine.TextCombine.TypefaceStyle
-import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 internal class TextCombineDSLBuilderTest {
@@ -51,8 +51,8 @@ internal class TextCombineDSLBuilderTest {
         }
 
         // then
-        Assertions.assertEquals(
-            TextCombine(texts = listOf(TextCombine.TextValue(source = FromString(text = "String text")))),
+        assertEquals(
+            TextCombine(texts = listOf(TextCombine.TextValue(text = FromString(text = "String text")))),
             stringCombine
         )
     }
@@ -61,12 +61,12 @@ internal class TextCombineDSLBuilderTest {
     fun `should build text combine with string resource`() {
         // given
         val stringCombine = stringCombine {
-            appendStringResource(resourceId = 1)
+            appendStringResource(stringResId = 1)
         }
 
         // then
-        Assertions.assertEquals(
-            TextCombine(texts = listOf(TextCombine.TextValue(source = FromStringResource(stringResId = 1)))),
+        assertEquals(
+            TextCombine(texts = listOf(TextCombine.TextValue(text = FromStringResource(stringResId = 1)))),
             stringCombine
         )
     }
@@ -75,12 +75,12 @@ internal class TextCombineDSLBuilderTest {
     fun `should build text combine with string plural resource`() {
         // given
         val stringCombine = stringCombine {
-            appendStringPluralResource(resourceId = 1, count = 1)
+            appendStringPluralResource(pluralResId = 1, count = 1)
         }
 
         // then
-        Assertions.assertEquals(
-            TextCombine(texts = listOf(TextCombine.TextValue(source = FromStringPluralResource(pluralResId = 1, count = 1)))),
+        assertEquals(
+            TextCombine(texts = listOf(TextCombine.TextValue(text = FromStringPluralResource(pluralResId = 1, count = 1)))),
             stringCombine
         )
     }
@@ -95,12 +95,12 @@ internal class TextCombineDSLBuilderTest {
         }
 
         // then
-        Assertions.assertEquals(
+        assertEquals(
             TextCombine(
                 texts = listOf(
                     TextCombine.TextValue(
-                        source = FromString(text = "String text"),
-                        formatArgs = listOf(TextCombine.TextValue(source = FromString(text = "format")))
+                        text = FromString(text = "String text"),
+                        formatArgs = listOf(TextCombine.TextValue(text = FromString(text = "format")))
                     )
                 )
             ),
@@ -112,18 +112,18 @@ internal class TextCombineDSLBuilderTest {
     fun `should build text combine with string resource with format argument`() {
         // given
         val stringCombine = stringCombine {
-            appendStringResource(resourceId = 1) {
-                formatWithStringResource(resourceId = 2)
+            appendStringResource(stringResId = 1) {
+                formatWithStringResource(stringResId = 2)
             }
         }
 
         // then
-        Assertions.assertEquals(
+        assertEquals(
             TextCombine(
                 texts = listOf(
                     TextCombine.TextValue(
-                        source = FromStringResource(stringResId = 1),
-                        formatArgs = listOf(TextCombine.TextValue(source = FromStringResource(stringResId = 2)))
+                        text = FromStringResource(stringResId = 1),
+                        formatArgs = listOf(TextCombine.TextValue(text = FromStringResource(stringResId = 2)))
                     )
                 )
             ),
@@ -135,18 +135,18 @@ internal class TextCombineDSLBuilderTest {
     fun `should build text combine with string plural resource with format argument`() {
         // given
         val stringCombine = stringCombine {
-            appendStringPluralResource(resourceId = 1, count = 1) {
-                formatWithStringPluralResource(resourceId = 2, count = 2)
+            appendStringPluralResource(pluralResId = 1, count = 1) {
+                formatWithStringPluralResource(pluralResId = 2, count = 2)
             }
         }
 
         // then
-        Assertions.assertEquals(
+        assertEquals(
             TextCombine(
                 texts = listOf(
                     TextCombine.TextValue(
-                        source = FromStringPluralResource(pluralResId = 1, count = 1),
-                        formatArgs = listOf(TextCombine.TextValue(source = FromStringPluralResource(pluralResId = 2, count = 2)))
+                        text = FromStringPluralResource(pluralResId = 1, count = 1),
+                        formatArgs = listOf(TextCombine.TextValue(text = FromStringPluralResource(pluralResId = 2, count = 2)))
                     )
                 )
             ),
@@ -166,11 +166,11 @@ internal class TextCombineDSLBuilderTest {
         }
 
         // then
-        Assertions.assertEquals(
+        assertEquals(
             TextCombine(
                 texts = listOf(
                     TextCombine.TextValue(
-                        source = FromString(text = "String text"),
+                        text = FromString(text = "String text"),
                         spans = listOf(AbsoluteSize(size = DimensionValue.FromPx(value = 1)))
                     )
                 )
@@ -191,11 +191,11 @@ internal class TextCombineDSLBuilderTest {
         }
 
         // then
-        Assertions.assertEquals(
+        assertEquals(
             TextCombine(
                 texts = listOf(
                     TextCombine.TextValue(
-                        source = FromString(text = "String text"),
+                        text = FromString(text = "String text"),
                         spans = listOf(BackgroundColor(color = ColorSource.FromInt(color = 1)))
                     )
                 )
@@ -217,11 +217,11 @@ internal class TextCombineDSLBuilderTest {
         }
 
         // then
-        Assertions.assertEquals(
+        assertEquals(
             TextCombine(
                 texts = listOf(
                     TextCombine.TextValue(
-                        source = FromString(text = "String text"),
+                        text = FromString(text = "String text"),
                         spans = listOf(Clickable(onClick = onClick, id = "id"))
                     )
                 )
@@ -242,11 +242,11 @@ internal class TextCombineDSLBuilderTest {
         }
 
         // then
-        Assertions.assertEquals(
+        assertEquals(
             TextCombine(
                 texts = listOf(
                     TextCombine.TextValue(
-                        source = FromString(text = "String text"),
+                        text = FromString(text = "String text"),
                         spans = listOf(ForegroundColor(color = ColorSource.FromInt(color = 1)))
                     )
                 )
@@ -282,11 +282,11 @@ internal class TextCombineDSLBuilderTest {
         }
 
         // then
-        Assertions.assertEquals(
+        assertEquals(
             TextCombine(
                 texts = listOf(
                     TextCombine.TextValue(
-                        source = FromString(text = "String text"),
+                        text = FromString(text = "String text"),
                         spans = listOf(
                             Image(
                                 image = ImageSource.FromDrawable(drawableResId = 1),
@@ -322,11 +322,11 @@ internal class TextCombineDSLBuilderTest {
         }
 
         // then
-        Assertions.assertEquals(
+        assertEquals(
             TextCombine(
                 texts = listOf(
                     TextCombine.TextValue(
-                        source = FromString(text = "String text"),
+                        text = FromString(text = "String text"),
                         spans = listOf(MaskFilter(filterType = MaskFilterType.Blur(blurType = BlurType.NORMAL, radius = 1.0f)))
                     )
                 )
@@ -347,11 +347,11 @@ internal class TextCombineDSLBuilderTest {
         }
 
         // then
-        Assertions.assertEquals(
+        assertEquals(
             TextCombine(
                 texts = listOf(
                     TextCombine.TextValue(
-                        source = FromString(text = "String text"),
+                        text = FromString(text = "String text"),
                         spans = listOf(RelativeSize(proportion = 1.0f))
                     )
                 )
@@ -372,11 +372,11 @@ internal class TextCombineDSLBuilderTest {
         }
 
         // then
-        Assertions.assertEquals(
+        assertEquals(
             TextCombine(
                 texts = listOf(
                     TextCombine.TextValue(
-                        source = FromString(text = "String text"),
+                        text = FromString(text = "String text"),
                         spans = listOf(ScaleX(proportion = 1.0f))
                     )
                 )
@@ -397,11 +397,11 @@ internal class TextCombineDSLBuilderTest {
         }
 
         // then
-        Assertions.assertEquals(
+        assertEquals(
             TextCombine(
                 texts = listOf(
                     TextCombine.TextValue(
-                        source = FromString(text = "String text"),
+                        text = FromString(text = "String text"),
                         spans = listOf(Strikethrough)
                     )
                 )
@@ -422,11 +422,11 @@ internal class TextCombineDSLBuilderTest {
         }
 
         // then
-        Assertions.assertEquals(
+        assertEquals(
             TextCombine(
                 texts = listOf(
                     TextCombine.TextValue(
-                        source = FromString(text = "String text"),
+                        text = FromString(text = "String text"),
                         spans = listOf(Style(typefaceStyle = TypefaceStyle.NORMAL))
                     )
                 )
@@ -447,11 +447,11 @@ internal class TextCombineDSLBuilderTest {
         }
 
         // then
-        Assertions.assertEquals(
+        assertEquals(
             TextCombine(
                 texts = listOf(
                     TextCombine.TextValue(
-                        source = FromString(text = "String text"),
+                        text = FromString(text = "String text"),
                         spans = listOf(Subscript)
                     )
                 )
@@ -472,11 +472,11 @@ internal class TextCombineDSLBuilderTest {
         }
 
         // then
-        Assertions.assertEquals(
+        assertEquals(
             TextCombine(
                 texts = listOf(
                     TextCombine.TextValue(
-                        source = FromString(text = "String text"),
+                        text = FromString(text = "String text"),
                         spans = listOf(Superscript)
                     )
                 )
@@ -499,11 +499,11 @@ internal class TextCombineDSLBuilderTest {
         }
 
         // then
-        Assertions.assertEquals(
+        assertEquals(
             TextCombine(
                 texts = listOf(
                     TextCombine.TextValue(
-                        source = FromString(text = "String text"),
+                        text = FromString(text = "String text"),
                         spans = listOf(TextAppearance(appearanceResId = 1, colorListResId = 2))
                     )
                 )
@@ -524,11 +524,11 @@ internal class TextCombineDSLBuilderTest {
         }
 
         // then
-        Assertions.assertEquals(
+        assertEquals(
             TextCombine(
                 texts = listOf(
                     TextCombine.TextValue(
-                        source = FromString(text = "String text"),
+                        text = FromString(text = "String text"),
                         spans = listOf(Typeface(typeface = TypefaceSource.FromAssets(fileName = "fileName")))
                     )
                 )
@@ -549,11 +549,11 @@ internal class TextCombineDSLBuilderTest {
         }
 
         // then
-        Assertions.assertEquals(
+        assertEquals(
             TextCombine(
                 texts = listOf(
                     TextCombine.TextValue(
-                        source = FromString(text = "String text"),
+                        text = FromString(text = "String text"),
                         spans = listOf(Underline)
                     )
                 )
@@ -575,11 +575,11 @@ internal class TextCombineDSLBuilderTest {
         }
 
         // then
-        Assertions.assertEquals(
+        assertEquals(
             TextCombine(
                 texts = listOf(
                     TextCombine.TextValue(
-                        source = FromString(text = "String text"),
+                        text = FromString(text = "String text"),
                         spans = listOf(Alignment(alignment = TextAlignmentType.ALIGN_NORMAL))
                     )
                 )
@@ -604,11 +604,11 @@ internal class TextCombineDSLBuilderTest {
         }
 
         // then
-        Assertions.assertEquals(
+        assertEquals(
             TextCombine(
                 texts = listOf(
                     TextCombine.TextValue(
-                        source = FromString(text = "String text"),
+                        text = FromString(text = "String text"),
                         spans = listOf(
                             Bullet(
                                 gapWidth = DimensionValue.FromPx(value = 1),
@@ -647,11 +647,11 @@ internal class TextCombineDSLBuilderTest {
         }
 
         // then
-        Assertions.assertEquals(
+        assertEquals(
             TextCombine(
                 texts = listOf(
                     TextCombine.TextValue(
-                        source = FromString(text = "String text"),
+                        text = FromString(text = "String text"),
                         spans = listOf(
                             LeadingImage(
                                 image = ImageSource.FromDrawable(drawableResId = 1),
@@ -686,11 +686,11 @@ internal class TextCombineDSLBuilderTest {
         }
 
         // then
-        Assertions.assertEquals(
+        assertEquals(
             TextCombine(
                 texts = listOf(
                     TextCombine.TextValue(
-                        source = FromString(text = "String text"),
+                        text = FromString(text = "String text"),
                         spans = listOf(LeadingMargin(first = 1, rest = 2))
                     )
                 )
@@ -711,11 +711,11 @@ internal class TextCombineDSLBuilderTest {
         }
 
         // then
-        Assertions.assertEquals(
+        assertEquals(
             TextCombine(
                 texts = listOf(
                     TextCombine.TextValue(
-                        source = FromString(text = "String text"),
+                        text = FromString(text = "String text"),
                         spans = listOf(LineBackground(color = ColorSource.FromInt(color = 1)))
                     )
                 )
@@ -736,11 +736,11 @@ internal class TextCombineDSLBuilderTest {
         }
 
         // then
-        Assertions.assertEquals(
+        assertEquals(
             TextCombine(
                 texts = listOf(
                     TextCombine.TextValue(
-                        source = FromString(text = "String text"),
+                        text = FromString(text = "String text"),
                         spans = listOf(LineHeight(height = DimensionValue.FromPx(value = 1)))
                     )
                 )
@@ -765,11 +765,11 @@ internal class TextCombineDSLBuilderTest {
         }
 
         // then
-        Assertions.assertEquals(
+        assertEquals(
             TextCombine(
                 texts = listOf(
                     TextCombine.TextValue(
-                        source = FromString(text = "String text"),
+                        text = FromString(text = "String text"),
                         spans = listOf(
                             Quote(
                                 color = ColorSource.FromInt(color = 1),
@@ -796,11 +796,11 @@ internal class TextCombineDSLBuilderTest {
         }
 
         // then
-        Assertions.assertEquals(
+        assertEquals(
             TextCombine(
                 texts = listOf(
                     TextCombine.TextValue(
-                        source = FromString(text = "String text"),
+                        text = FromString(text = "String text"),
                         spans = listOf(TabStop(offset = DimensionValue.FromPx(value = 1)))
                     )
                 )

@@ -65,93 +65,75 @@ fun stringCombine(builder: (@TextCombineDsl StringCombineBuilder).() -> Unit): T
 class StringCombineBuilder {
 
     private val texts = mutableListOf<TextValue>()
+    private val paragraphSpans = mutableListOf<StyleSpan>()
 
-    fun appendString(text: String, builder: (@TextCombineDsl StringTextValueBuilder).() -> Unit = {}) {
-        texts.add(StringTextValueBuilder(text = text).apply(builder).build())
+    fun appendString(text: String, builder: (@TextCombineDsl TextValueBuilder).() -> Unit = {}) {
+        addFormatArgument(text = FromString(text = text), builder = builder)
     }
 
     fun appendStringResource(
-        @StringRes resourceId: Int,
-        builder: (@TextCombineDsl StringResourceTextValueBuilder).() -> Unit = {}
+        @StringRes stringResId: Int,
+        builder: (@TextCombineDsl TextValueBuilder).() -> Unit = {}
     ) {
-        texts.add(StringResourceTextValueBuilder(resourceId = resourceId).apply(builder).build())
+        addFormatArgument(text = FromStringResource(stringResId = stringResId), builder = builder)
     }
 
     fun appendStringPluralResource(
-        @PluralsRes resourceId: Int,
+        @PluralsRes pluralResId: Int,
         count: Int,
-        builder: (@TextCombineDsl StringPluralResourceTextValueBuilder).() -> Unit = {}
+        builder: (@TextCombineDsl TextValueBuilder).() -> Unit = {}
     ) {
-        texts.add(StringPluralResourceTextValueBuilder(resourceId = resourceId, count = count).apply(builder).build())
+        addFormatArgument(text = FromStringPluralResource(pluralResId = pluralResId, count = count), builder = builder)
     }
 
-    fun build(): TextCombine {
-        return TextCombine(texts = texts)
+    fun setSpans(builder: (@TextCombineDsl SpanBuilder).() -> Unit = {}) {
+        paragraphSpans.addAll(SpanBuilder().apply(builder).build())
+    }
+
+    internal fun build(): TextCombine {
+        return TextCombine(texts = texts, spans = paragraphSpans)
+    }
+
+    private fun addFormatArgument(text: TextCombine.TextSource, builder: (@TextCombineDsl TextValueBuilder).() -> Unit = {}) {
+        val textBuilder = TextValueBuilder().apply(builder)
+        texts.add(TextValue(text = text, formatArgs = textBuilder.formatArgs, spans = textBuilder.spans))
     }
 }
 
-abstract class TextValueBuilder {
+class TextValueBuilder {
 
-    protected abstract val source: TextCombine.TextSource
-    protected abstract val spans: List<StyleSpan>
-    private val formatArgs = mutableListOf<TextValue>()
+    internal val formatArgs = mutableListOf<TextValue>()
+    internal val spans = mutableListOf<StyleSpan>()
 
-    fun formatWithString(text: String, builder: (@TextCombineDsl StringTextValueBuilder).() -> Unit = {}) {
-        formatArgs.add(StringTextValueBuilder(text = text).apply(builder).build())
+    fun formatWithString(text: String, builder: (@TextCombineDsl TextValueBuilder).() -> Unit = {}) {
+        addFormatArgument(text = FromString(text = text), builder = builder)
     }
 
     fun formatWithStringResource(
-        @StringRes resourceId: Int,
-        builder: (@TextCombineDsl StringResourceTextValueBuilder).() -> Unit = {}
+        @StringRes stringResId: Int,
+        builder: (@TextCombineDsl TextValueBuilder).() -> Unit = {}
     ) {
-        formatArgs.add(StringResourceTextValueBuilder(resourceId = resourceId).apply(builder).build())
+        addFormatArgument(text = FromStringResource(stringResId = stringResId), builder = builder)
+
     }
 
     fun formatWithStringPluralResource(
-        @PluralsRes resourceId: Int,
+        @PluralsRes pluralResId: Int,
         count: Int,
-        builder: (@TextCombineDsl StringPluralResourceTextValueBuilder).() -> Unit = {}
+        builder: (@TextCombineDsl TextValueBuilder).() -> Unit = {}
     ) {
-        formatArgs.add(StringPluralResourceTextValueBuilder(resourceId = resourceId, count = count).apply(builder).build())
+        addFormatArgument(text = FromStringPluralResource(pluralResId = pluralResId, count = count), builder = builder)
     }
-
-    fun build(): TextValue {
-        return TextValue(
-            source = source,
-            formatArgs = formatArgs,
-            spans = spans
-        )
-    }
-}
-
-@TextCombineDsl
-class StringTextValueBuilder(text: String) : TextValueBuilder() {
-    override val source = FromString(text = text)
-    override val spans = mutableListOf<StyleSpan>()
 
     fun setSpans(builder: (@TextCombineDsl SpanBuilder).() -> Unit = {}) {
         spans.addAll(SpanBuilder().apply(builder).build())
     }
-}
 
-class StringResourceTextValueBuilder(@StringRes resourceId: Int) : TextValueBuilder() {
-    override var source = FromStringResource(stringResId = resourceId)
-    override val spans = mutableListOf<StyleSpan>()
-
-    fun setSpans(builder: (@TextCombineDsl SpanBuilder).() -> Unit = {}) {
-        spans.addAll(SpanBuilder().apply(builder).build())
+    private fun addFormatArgument(text: TextCombine.TextSource, builder: (@TextCombineDsl TextValueBuilder).() -> Unit = {}) {
+        val textBuilder = TextValueBuilder().apply(builder)
+        formatArgs.add(TextValue(text = text, formatArgs = textBuilder.formatArgs, spans = textBuilder.spans))
     }
 }
-
-class StringPluralResourceTextValueBuilder(@PluralsRes resourceId: Int, count: Int) : TextValueBuilder() {
-    override var source = FromStringPluralResource(pluralResId = resourceId, count = count)
-    override val spans = mutableListOf<StyleSpan>()
-
-    fun setSpans(builder: SpanBuilder.() -> Unit = {}) {
-        spans.addAll(SpanBuilder().apply(builder).build())
-    }
-}
-
 interface SpanBuilderContext
 
 class SpanBuilder : SpanBuilderContext {
@@ -221,7 +203,6 @@ class SpanBuilder : SpanBuilderContext {
     fun textAppearance(@StyleRes appearanceResId: Int, builder: (TextAppearanceBuilder.() -> Unit)? = null) {
         val spanBuilder = builder?.let { TextAppearanceBuilder().apply(it) }
         spans.add(TextAppearance(appearanceResId = appearanceResId, colorListResId = spanBuilder?.colorListResId ?: -1))
-
     }
 
     fun typeface(typeface: TypefaceSource) {
@@ -267,7 +248,7 @@ class SpanBuilder : SpanBuilderContext {
         spans.add(TabStop(offset = offset))
     }
 
-    fun build(): List<StyleSpan> {
+    internal fun build(): List<StyleSpan> {
         return spans
     }
 }
@@ -289,7 +270,6 @@ class LeadingImageSpanBuilder {
             Margin(start = marginBuilder.start, top = marginBuilder.top, bottom = marginBuilder.bottom, end = marginBuilder.end)
     }
 }
-
 
 class ImageSpanBuilder {
 
