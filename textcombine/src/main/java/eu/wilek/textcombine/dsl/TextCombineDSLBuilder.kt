@@ -336,11 +336,11 @@ fun SpanBuilderContext.colorFromResource(@ColorRes colorResId: Int): ColorSource
 }
 
 
-fun SpanBuilderContext.dimensionFromPx(@Dimension(unit = Dimension.PX) value: Int): DimensionValue {
+fun SpanBuilderContext.dimensionFromPx(@Dimension(unit = Dimension.PX) value: Float): DimensionValue {
     return DimensionValue.FromPx(value = value)
 }
 
-fun SpanBuilderContext.dimensionFromDp(@Dimension(unit = Dimension.DP) value: Int): DimensionValue {
+fun SpanBuilderContext.dimensionFromDp(@Dimension(unit = Dimension.DP) value: Float): DimensionValue {
     return DimensionValue.FromDp(value = value)
 }
 

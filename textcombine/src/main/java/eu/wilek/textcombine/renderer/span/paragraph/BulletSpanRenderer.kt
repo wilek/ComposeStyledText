@@ -31,6 +31,7 @@ import eu.wilek.textcombine.TextCombine.StyleSpan.ParagraphStyle.Bullet
 import eu.wilek.textcombine.renderer.span.SpanRenderer
 import eu.wilek.textcombine.util.toColor
 import eu.wilek.textcombine.util.toPx
+import kotlin.math.roundToInt
 
 open class BulletSpanRenderer(private val context: Context) : SpanRenderer<Bullet> {
 
@@ -43,13 +44,13 @@ open class BulletSpanRenderer(private val context: Context) : SpanRenderer<Bulle
     }
 
     private companion object {
-        val DEFAULT_GAP_WIDTH = DimensionValue.FromDp(value = 8)
-        val DEFAULT_BULLET_RADIUS = DimensionValue.FromDp(value = 4)
+        val DEFAULT_GAP_WIDTH = DimensionValue.FromDp(value = 8f)
+        val DEFAULT_BULLET_RADIUS = DimensionValue.FromDp(value = 4f)
     }
 
     private class BulletPointSpan(
-        @Px private val gapWidth: Int,
-        @Px private val bulletRadius: Int,
+        @Px private val gapWidth: Float,
+        @Px private val bulletRadius: Float,
         @ColorInt private val bulletColor: Int
     ) : LeadingMarginSpan {
 
@@ -57,7 +58,7 @@ open class BulletSpanRenderer(private val context: Context) : SpanRenderer<Bulle
         private val bulletPath: Path by lazy(LazyThreadSafetyMode.NONE) { Path() }
 
         override fun getLeadingMargin(first: Boolean): Int {
-            return (2 * bulletRadius + 2 * gapWidth)
+            return (2 * bulletRadius + 2 * gapWidth).roundToInt()
         }
 
         override fun drawLeadingMargin(
@@ -77,7 +78,7 @@ open class BulletSpanRenderer(private val context: Context) : SpanRenderer<Bulle
             if ((text as Spanned).getSpanStart(this) == lineStart) {
                 paint.withCustomColor {
                     if (canvas.isHardwareAccelerated) {
-                        bulletPath.addCircle(0f, 0.0f, bulletRadius.toFloat(), Path.Direction.CW)
+                        bulletPath.addCircle(0f, 0.0f, bulletRadius, Path.Direction.CW)
                         val save = canvas.save()
                         canvas.translate(
                             getCircleXLocation(currentMarginLocation, paragraphDirection),
@@ -89,7 +90,7 @@ open class BulletSpanRenderer(private val context: Context) : SpanRenderer<Bulle
                         canvas.drawCircle(
                             getCircleXLocation(currentMarginLocation, paragraphDirection),
                             getCircleYLocation(lineTop, lineBottom),
-                            bulletRadius.toFloat(),
+                            bulletRadius,
                             paint
                         )
                     }
@@ -102,7 +103,7 @@ open class BulletSpanRenderer(private val context: Context) : SpanRenderer<Bulle
         }
 
         private fun getCircleXLocation(currentMarginLocation: Int, paragraphDirection: Int): Float {
-            return currentMarginLocation + paragraphDirection * bulletRadius.toFloat()
+            return currentMarginLocation + paragraphDirection * bulletRadius
         }
 
         private inline fun Paint.withCustomColor(block: () -> Unit) {

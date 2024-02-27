@@ -17,6 +17,7 @@ import eu.wilek.textcombine.TextCombine.BitmapSource
 import eu.wilek.textcombine.TextCombine.ImageSource
 import eu.wilek.textcombine.TextCombine.ImageSource.FromBitmap
 import eu.wilek.textcombine.TextCombine.ImageSource.FromDrawable
+import kotlin.math.roundToInt
 
 internal fun ImageSource.toImage(
     context: Context,
@@ -27,20 +28,20 @@ internal fun ImageSource.toImage(
         is FromBitmap -> bitmapSource.createBitmap(context = context).toDrawable(context = context)
         is FromDrawable -> AppCompatResources.getDrawable(context, drawableResId)!!
     }
-    val startMargin = margin?.start?.toPx(context = context) ?: 0
-    val topMargin = margin?.top?.toPx(context = context) ?: 0
-    val endMargin = margin?.end?.toPx(context = context) ?: 0
-    val bottomMargin = margin?.bottom?.toPx(context = context) ?: 0
+    val startMargin = margin?.start?.toPx(context = context)?.toInt() ?: 0
+    val topMargin = margin?.top?.toPx(context = context)?.toInt() ?: 0
+    val endMargin = margin?.end?.toPx(context = context)?.toInt() ?: 0
+    val bottomMargin = margin?.bottom?.toPx(context = context)?.toInt() ?: 0
     val width = size?.width?.toPx(context = context)
     val height = size?.height?.toPx(context = context)
     val drawableWidth = when {
-        width != null -> width
-        height != null -> (height / drawable.intrinsicHeight) * drawable.intrinsicWidth
+        width != null -> width.toInt()
+        height != null -> ((height / drawable.intrinsicHeight) * drawable.intrinsicWidth).roundToInt()
         else -> drawable.intrinsicWidth
     }
     val drawableHeight = when {
-        height != null -> height
-        width != null -> (width / drawable.intrinsicWidth) * drawable.intrinsicHeight
+        height != null -> height.toInt()
+        width != null -> ((width / drawable.intrinsicWidth) * drawable.intrinsicHeight).roundToInt()
         else -> drawable.intrinsicHeight
     }
 

@@ -8,34 +8,36 @@ import android.text.Layout
 import android.text.style.LeadingMarginSpan
 import androidx.annotation.ColorInt
 import androidx.annotation.Px
+import eu.wilek.textcombine.TextCombine
 import eu.wilek.textcombine.TextCombine.StyleSpan.ParagraphStyle.Quote
 import eu.wilek.textcombine.renderer.span.SpanRenderer
 import eu.wilek.textcombine.util.toColor
 import eu.wilek.textcombine.util.toPx
+import kotlin.math.roundToInt
 
 open class QuoteSpanRenderer(private val context: Context) : SpanRenderer<Quote> {
 
     override fun renderSpan(styleSpan: Quote): Any {
         return QuoteSpan(
-            gapWidth = styleSpan.gapWidth?.toPx(context = context) ?: STANDARD_GAP_WIDTH_PX,
-            stripeWidth = styleSpan.stripeWidth?.toPx(context = context) ?: STANDARD_STRIPE_WIDTH_PX,
+            gapWidth = (styleSpan.gapWidth ?: DEFAULT_GAP_WIDTH).toPx(context = context),
+            stripeWidth = (styleSpan.stripeWidth ?: DEFAULT_STRIPE_WIDTH).toPx(context = context),
             color = styleSpan.color?.toColor(context = context) ?: Color.BLACK
         )
     }
 
     private companion object {
-        const val STANDARD_GAP_WIDTH_PX = 2
-        const val STANDARD_STRIPE_WIDTH_PX = 2
+        val DEFAULT_GAP_WIDTH = TextCombine.DimensionValue.FromDp(value = 2f)
+        val DEFAULT_STRIPE_WIDTH = TextCombine.DimensionValue.FromDp(value = 2f)
     }
 
     private class QuoteSpan(
-        @Px private val gapWidth: Int,
-        @Px private val stripeWidth: Int,
+        @Px private val gapWidth: Float,
+        @Px private val stripeWidth: Float,
         @ColorInt private val color: Int
     ) : LeadingMarginSpan {
 
         override fun getLeadingMargin(first: Boolean): Int {
-            return stripeWidth + gapWidth
+            return (gapWidth + stripeWidth).roundToInt()
         }
 
         override fun drawLeadingMargin(
@@ -58,7 +60,7 @@ open class QuoteSpanRenderer(private val context: Context) : SpanRenderer<Quote>
             paint.style = Paint.Style.FILL
             paint.color = color
 
-            canvas.drawRect(x.toFloat(), top.toFloat(), (x + dir * stripeWidth).toFloat(), bottom.toFloat(), paint)
+            canvas.drawRect(x.toFloat(), top.toFloat(), x + dir * stripeWidth, bottom.toFloat(), paint)
 
             paint.style = paintStyle
             paint.color = paintColor

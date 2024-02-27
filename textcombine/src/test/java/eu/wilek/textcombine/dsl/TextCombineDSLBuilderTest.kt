@@ -160,7 +160,7 @@ internal class TextCombineDSLBuilderTest {
         val stringCombine = stringCombine {
             appendString(text = "String text") {
                 setSpans {
-                    absoluteSize(size = dimensionFromPx(value = 1))
+                    absoluteSize(size = dimensionFromPx(value = 1f))
                 }
             }
         }
@@ -171,7 +171,7 @@ internal class TextCombineDSLBuilderTest {
                 texts = listOf(
                     TextCombine.TextValue(
                         text = FromString(text = "String text"),
-                        spans = listOf(AbsoluteSize(size = DimensionValue.FromPx(value = 1)))
+                        spans = listOf(AbsoluteSize(size = DimensionValue.FromPx(value = 1f)))
                     )
                 )
             ),
@@ -266,14 +266,14 @@ internal class TextCombineDSLBuilderTest {
                         alignType = ImageAlignType.ALIGN_BOTTOM
                     ) {
                         size {
-                            width = dimensionFromPx(value = 2)
-                            height = dimensionFromPx(value = 3)
+                            width = dimensionFromPx(value = 2f)
+                            height = dimensionFromPx(value = 3f)
                         }
                         margin {
-                            start = dimensionFromPx(value = 4)
-                            top = dimensionFromPx(value = 5)
-                            bottom = dimensionFromPx(value = 6)
-                            end = dimensionFromPx(value = 7)
+                            start = dimensionFromPx(value = 4f)
+                            top = dimensionFromPx(value = 5f)
+                            bottom = dimensionFromPx(value = 6f)
+                            end = dimensionFromPx(value = 7f)
 
                         }
                     }
@@ -292,14 +292,14 @@ internal class TextCombineDSLBuilderTest {
                                 image = ImageSource.FromDrawable(drawableResId = 1),
                                 alignType = ImageAlignType.ALIGN_BOTTOM,
                                 size = Size(
-                                    width = DimensionValue.FromPx(value = 2),
-                                    height = DimensionValue.FromPx(value = 3)
+                                    width = DimensionValue.FromPx(value = 2f),
+                                    height = DimensionValue.FromPx(value = 3f)
                                 ),
                                 margin = Margin(
-                                    start = DimensionValue.FromPx(value = 4),
-                                    top = DimensionValue.FromPx(value = 5),
-                                    bottom = DimensionValue.FromPx(value = 6),
-                                    end = DimensionValue.FromPx(value = 7)
+                                    start = DimensionValue.FromPx(value = 4f),
+                                    top = DimensionValue.FromPx(value = 5f),
+                                    bottom = DimensionValue.FromPx(value = 6f),
+                                    end = DimensionValue.FromPx(value = 7f)
                                 )
                             )
                         )
@@ -595,9 +595,9 @@ internal class TextCombineDSLBuilderTest {
             appendString(text = "String text") {
                 setSpans {
                     bullet {
-                        gapWidth = dimensionFromPx(value = 1)
+                        gapWidth = dimensionFromPx(value = 1f)
                         color = colorFromInt(color = 1)
-                        radius = dimensionFromPx(value = 2)
+                        radius = dimensionFromPx(value = 2f)
                     }
                 }
             }
@@ -611,9 +611,9 @@ internal class TextCombineDSLBuilderTest {
                         text = FromString(text = "String text"),
                         spans = listOf(
                             Bullet(
-                                gapWidth = DimensionValue.FromPx(value = 1),
+                                gapWidth = DimensionValue.FromPx(value = 1f),
                                 color = ColorSource.FromInt(color = 1),
-                                radius = DimensionValue.FromPx(value = 2)
+                                radius = DimensionValue.FromPx(value = 2f)
                             )
                         )
                     )
@@ -631,14 +631,14 @@ internal class TextCombineDSLBuilderTest {
                 setSpans {
                     leadingImage(image = imageFromDrawable(drawableResId = 1)) {
                         size {
-                            width = dimensionFromPx(value = 2)
-                            height = dimensionFromPx(value = 3)
+                            width = dimensionFromPx(value = 2f)
+                            height = dimensionFromPx(value = 3f)
                         }
                         margin {
-                            start = dimensionFromPx(value = 4)
-                            top = dimensionFromPx(value = 5)
-                            bottom = dimensionFromPx(value = 6)
-                            end = dimensionFromPx(value = 7)
+                            start = dimensionFromPx(value = 4f)
+                            top = dimensionFromPx(value = 5f)
+                            bottom = dimensionFromPx(value = 6f)
+                            end = dimensionFromPx(value = 7f)
 
                         }
                     }
@@ -656,14 +656,14 @@ internal class TextCombineDSLBuilderTest {
                             LeadingImage(
                                 image = ImageSource.FromDrawable(drawableResId = 1),
                                 size = Size(
-                                    width = DimensionValue.FromPx(value = 2),
-                                    height = DimensionValue.FromPx(value = 3)
+                                    width = DimensionValue.FromPx(value = 2f),
+                                    height = DimensionValue.FromPx(value = 3f)
                                 ),
                                 margin = Margin(
-                                    start = DimensionValue.FromPx(value = 4),
-                                    top = DimensionValue.FromPx(value = 5),
-                                    bottom = DimensionValue.FromPx(value = 6),
-                                    end = DimensionValue.FromPx(value = 7)
+                                    start = DimensionValue.FromPx(value = 4f),
+                                    top = DimensionValue.FromPx(value = 5f),
+                                    bottom = DimensionValue.FromPx(value = 6f),
+                                    end = DimensionValue.FromPx(value = 7f)
                                 )
                             )
                         )
@@ -730,7 +730,7 @@ internal class TextCombineDSLBuilderTest {
         val stringCombine = stringCombine {
             appendString(text = "String text") {
                 setSpans {
-                    lineHeight(height = dimensionFromPx(value = 1))
+                    lineHeight(height = dimensionFromPx(value = 1f))
                 }
             }
         }
@@ -741,7 +741,7 @@ internal class TextCombineDSLBuilderTest {
                 texts = listOf(
                     TextCombine.TextValue(
                         text = FromString(text = "String text"),
-                        spans = listOf(LineHeight(height = DimensionValue.FromPx(value = 1)))
+                        spans = listOf(LineHeight(height = DimensionValue.FromPx(value = 1f)))
                     )
                 )
             ),
@@ -757,8 +757,8 @@ internal class TextCombineDSLBuilderTest {
                 setSpans {
                     quote {
                         color = colorFromInt(color = 1)
-                        stripeWidth = dimensionFromPx(value = 1)
-                        gapWidth = dimensionFromPx(value = 2)
+                        stripeWidth = dimensionFromPx(value = 1f)
+                        gapWidth = dimensionFromPx(value = 2f)
                     }
                 }
             }
@@ -773,8 +773,8 @@ internal class TextCombineDSLBuilderTest {
                         spans = listOf(
                             Quote(
                                 color = ColorSource.FromInt(color = 1),
-                                stripeWidth = DimensionValue.FromPx(value = 1),
-                                gapWidth = DimensionValue.FromPx(value = 2)
+                                stripeWidth = DimensionValue.FromPx(value = 1f),
+                                gapWidth = DimensionValue.FromPx(value = 2f)
                             )
                         )
                     )
@@ -790,7 +790,7 @@ internal class TextCombineDSLBuilderTest {
         val stringCombine = stringCombine {
             appendString(text = "String text") {
                 setSpans {
-                    tabStop(offset = dimensionFromPx(value = 1))
+                    tabStop(offset = dimensionFromPx(value = 1f))
                 }
             }
         }
@@ -801,7 +801,7 @@ internal class TextCombineDSLBuilderTest {
                 texts = listOf(
                     TextCombine.TextValue(
                         text = FromString(text = "String text"),
-                        spans = listOf(TabStop(offset = DimensionValue.FromPx(value = 1)))
+                        spans = listOf(TabStop(offset = DimensionValue.FromPx(value = 1f)))
                     )
                 )
             ),

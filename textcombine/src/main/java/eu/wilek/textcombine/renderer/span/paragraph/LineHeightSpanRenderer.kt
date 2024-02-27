@@ -11,7 +11,7 @@ import kotlin.math.roundToInt
 open class LineHeightSpanRenderer(private val context: Context) : SpanRenderer<LineHeight> {
 
     override fun renderSpan(styleSpan: LineHeight): Any {
-        return LineHeightSpan(height = styleSpan.height.toPx(context = context))
+        return LineHeightSpan(height = styleSpan.height.toPx(context = context).roundToInt())
     }
 
     private class LineHeightSpan(@Px private val height: Int) : android.text.style.LineHeightSpan {
