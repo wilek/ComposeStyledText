@@ -103,7 +103,7 @@ class DefaultSpannableCreator : SpannableCreator {
         is Alignment -> AlignmentSpanRenderer().renderSpan(styleSpan = this)
         is Bullet -> BulletSpanRenderer(context = context).renderSpan(styleSpan = this)
         is LeadingImage -> LeadingImageSpanRenderer(context = context).renderSpan(styleSpan = this)
-        is LeadingMargin -> LeadingMarginSpanRenderer().renderSpan(styleSpan = this)
+        is LeadingMargin -> LeadingMarginSpanRenderer(context = context).renderSpan(styleSpan = this)
         is LineBackground -> LineBackgroundSpanRenderer(context = context).renderSpan(styleSpan = this)
         is LineHeight -> LineHeightSpanRenderer(context = context).renderSpan(styleSpan = this)
         is Quote -> QuoteSpanRenderer(context = context).renderSpan(styleSpan = this)

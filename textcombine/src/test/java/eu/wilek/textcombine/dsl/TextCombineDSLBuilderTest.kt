@@ -680,7 +680,7 @@ internal class TextCombineDSLBuilderTest {
         val stringCombine = stringCombine {
             appendString(text = "String text") {
                 setSpans {
-                    leadingMargin(first = 1, rest = 2)
+                    leadingMargin(first = dimensionFromPx(value = 1f), rest = dimensionFromPx(value = 2f))
                 }
             }
         }
@@ -691,7 +691,12 @@ internal class TextCombineDSLBuilderTest {
                 texts = listOf(
                     TextCombine.TextValue(
                         text = FromString(text = "String text"),
-                        spans = listOf(LeadingMargin(first = 1, rest = 2))
+                        spans = listOf(
+                            LeadingMargin(
+                                first = DimensionValue.FromPx(value = 1f),
+                                rest = DimensionValue.FromPx(value = 2f)
+                            )
+                        )
                     )
                 )
             ),

@@ -55,7 +55,7 @@ data class TextCombine(val texts: List<TextValue>, val spans: List<StyleSpan> = 
 
             data class TextAppearance(
                 @StyleRes val appearanceResId: Int,
-                @StyleableRes val colorListResId: Int = -1
+                @StyleableRes val colorListResId: Int? = null
             ) : CharacterStyle()
 
             data class Typeface(val typeface: TypefaceSource) : CharacterStyle()
@@ -77,7 +77,7 @@ data class TextCombine(val texts: List<TextValue>, val spans: List<StyleSpan> = 
                 val margin: Margin? = null
             ) : ParagraphStyle()
 
-            data class LeadingMargin(val first: Int, val rest: Int) : ParagraphStyle()
+            data class LeadingMargin(val first: DimensionValue, val rest: DimensionValue? = null) : ParagraphStyle()
             data class LineBackground(val color: ColorSource) : ParagraphStyle()
             data class LineHeight(val height: DimensionValue) : ParagraphStyle()
             data class Quote(

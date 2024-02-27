@@ -8,6 +8,9 @@ import eu.wilek.textcombine.renderer.span.SpanRenderer
 open class TextAppearanceSpanRenderer(private val context: Context) : SpanRenderer<TextAppearance> {
 
     override fun renderSpan(styleSpan: TextAppearance): Any {
-        return TextAppearanceSpan(context, styleSpan.appearanceResId, styleSpan.colorListResId)
+        return when (styleSpan.colorListResId) {
+            null -> TextAppearanceSpan(context, styleSpan.appearanceResId)
+            else -> TextAppearanceSpan(context, styleSpan.appearanceResId, styleSpan.colorListResId)
+        }
     }
 }

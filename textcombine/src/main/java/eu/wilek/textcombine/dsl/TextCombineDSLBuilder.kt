@@ -202,7 +202,7 @@ class SpanBuilder : SpanBuilderContext {
 
     fun textAppearance(@StyleRes appearanceResId: Int, builder: (TextAppearanceBuilder.() -> Unit)? = null) {
         val spanBuilder = builder?.let { TextAppearanceBuilder().apply(it) }
-        spans.add(TextAppearance(appearanceResId = appearanceResId, colorListResId = spanBuilder?.colorListResId ?: -1))
+        spans.add(TextAppearance(appearanceResId = appearanceResId, colorListResId = spanBuilder?.colorListResId))
     }
 
     fun typeface(typeface: TypefaceSource) {
@@ -227,7 +227,7 @@ class SpanBuilder : SpanBuilderContext {
         spans.add(LeadingImage(image = image, size = spanBuilder?.size, margin = spanBuilder?.margin))
     }
 
-    fun leadingMargin(first: Int, rest: Int) {
+    fun leadingMargin(first: DimensionValue, rest: DimensionValue? = null) {
         spans.add(LeadingMargin(first = first, rest = rest))
     }
 
@@ -266,8 +266,7 @@ class LeadingImageSpanBuilder {
 
     fun margin(builder: (@TextCombineDsl MarginBuilder).() -> Unit) {
         val marginBuilder = MarginBuilder().apply(builder)
-        margin =
-            Margin(start = marginBuilder.start, top = marginBuilder.top, bottom = marginBuilder.bottom, end = marginBuilder.end)
+        margin = Margin(start = marginBuilder.start, top = marginBuilder.top, bottom = marginBuilder.bottom, end = marginBuilder.end)
     }
 }
 
@@ -283,11 +282,9 @@ class ImageSpanBuilder {
 
     fun margin(builder: MarginBuilder.() -> Unit) {
         val marginBuilder = MarginBuilder().apply(builder)
-        margin =
-            Margin(start = marginBuilder.start, top = marginBuilder.top, bottom = marginBuilder.bottom, end = marginBuilder.end)
+        margin = Margin(start = marginBuilder.start, top = marginBuilder.top, bottom = marginBuilder.bottom, end = marginBuilder.end)
     }
 }
-
 
 class SizeBuilder : SpanBuilderContext {
 
