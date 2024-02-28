@@ -160,7 +160,7 @@ internal class TextCombineRendererInstanceTest {
     }
 
     @Test
-    fun `should set subscript span renderer`() {
+    fun `should set custom subscript span renderer`() {
         // given
         val subscriptSpanRenderer: SpanRenderer = mock()
 
@@ -172,7 +172,7 @@ internal class TextCombineRendererInstanceTest {
     }
 
     @Test
-    fun `should set superscript span renderer`() {
+    fun `should set custom superscript span renderer`() {
         // given
         val superscriptSpanRenderer: SpanRenderer = mock()
 
@@ -184,7 +184,7 @@ internal class TextCombineRendererInstanceTest {
     }
 
     @Test
-    fun `should set text appearance span renderer`() {
+    fun `should set custom text appearance span renderer`() {
         // given
         val textAppearanceSpanRenderer: SpanRenderer = mock()
 
