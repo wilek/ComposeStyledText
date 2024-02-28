@@ -1,7 +1,6 @@
 package eu.wilek.textcombine.config
 
 import android.content.Context
-import eu.wilek.textcombine.renderer.TextCombineRenderer
 import eu.wilek.textcombine.TextCombine.StyleSpan.CharacterStyle.AbsoluteSize
 import eu.wilek.textcombine.TextCombine.StyleSpan.CharacterStyle.BackgroundColor
 import eu.wilek.textcombine.TextCombine.StyleSpan.CharacterStyle.Clickable
@@ -25,6 +24,7 @@ import eu.wilek.textcombine.TextCombine.StyleSpan.ParagraphStyle.LineBackground
 import eu.wilek.textcombine.TextCombine.StyleSpan.ParagraphStyle.LineHeight
 import eu.wilek.textcombine.TextCombine.StyleSpan.ParagraphStyle.Quote
 import eu.wilek.textcombine.TextCombine.StyleSpan.ParagraphStyle.TabStop
+import eu.wilek.textcombine.renderer.TextCombineRenderer
 import eu.wilek.textcombine.renderer.TextCombineRendererImpl
 import eu.wilek.textcombine.renderer.span.SpanRenderer
 import eu.wilek.textcombine.renderer.span.character.AbsoluteSizeSpanRenderer
@@ -84,6 +84,94 @@ class TextCombineRendererInstance private constructor(private val context: Conte
         defaultSpanRenderers[AbsoluteSize::class] = spanRenderer
     }
 
+    fun setCustomBackgroundColorSpanRenderer(spanRenderer: SpanRenderer) {
+        defaultSpanRenderers[BackgroundColor::class] = spanRenderer
+    }
+
+    fun setCustomClickableSpanRenderer(spanRenderer: SpanRenderer) {
+        defaultSpanRenderers[Clickable::class] = spanRenderer
+    }
+
+    fun setCustomForegroundColorSpanRenderer(spanRenderer: SpanRenderer) {
+        defaultSpanRenderers[ForegroundColor::class] = spanRenderer
+    }
+
+    fun setCustomImageSpanRenderer(spanRenderer: SpanRenderer) {
+        defaultSpanRenderers[Image::class] = spanRenderer
+    }
+
+    fun setCustomMaskFilterSpanRenderer(spanRenderer: SpanRenderer) {
+        defaultSpanRenderers[MaskFilter::class] = spanRenderer
+    }
+
+    fun setCustomRelativeSizeSpanRenderer(spanRenderer: SpanRenderer) {
+        defaultSpanRenderers[RelativeSize::class] = spanRenderer
+    }
+
+    fun setCustomScaleXSpanRenderer(spanRenderer: SpanRenderer) {
+        defaultSpanRenderers[ScaleX::class] = spanRenderer
+    }
+
+    fun setCustomStrikethroughSpanRenderer(spanRenderer: SpanRenderer) {
+        defaultSpanRenderers[Strikethrough::class] = spanRenderer
+    }
+
+    fun setCustomStyleSpanRenderer(spanRenderer: SpanRenderer) {
+        defaultSpanRenderers[Style::class] = spanRenderer
+    }
+
+    fun setCustomSubscriptSpanRenderer(spanRenderer: SpanRenderer) {
+        defaultSpanRenderers[Subscript::class] = spanRenderer
+    }
+
+    fun setCustomSuperscriptSpanRenderer(spanRenderer: SpanRenderer) {
+        defaultSpanRenderers[Superscript::class] = spanRenderer
+    }
+
+    fun setCustomTextAppearanceSpanRenderer(spanRenderer: SpanRenderer) {
+        defaultSpanRenderers[TextAppearance::class] = spanRenderer
+    }
+
+    fun setCustomTypefaceSpanRenderer(spanRenderer: SpanRenderer) {
+        defaultSpanRenderers[Typeface::class] = spanRenderer
+    }
+
+    fun setCustomUnderlineSpanRenderer(spanRenderer: SpanRenderer) {
+        defaultSpanRenderers[Underline::class] = spanRenderer
+    }
+
+    fun setCustomAlignmentSpanRenderer(spanRenderer: SpanRenderer) {
+        defaultSpanRenderers[Alignment::class] = spanRenderer
+    }
+
+    fun setCustomBulletSpanRenderer(spanRenderer: SpanRenderer) {
+        defaultSpanRenderers[Bullet::class] = spanRenderer
+    }
+
+    fun setCustomLeadingImageSpanRenderer(spanRenderer: SpanRenderer) {
+        defaultSpanRenderers[LeadingImage::class] = spanRenderer
+    }
+
+    fun setCustomLeadingMarginSpanRenderer(spanRenderer: SpanRenderer) {
+        defaultSpanRenderers[LeadingMargin::class] = spanRenderer
+    }
+
+    fun setCustomLineBackgroundSpanRenderer(spanRenderer: SpanRenderer) {
+        defaultSpanRenderers[LineBackground::class] = spanRenderer
+    }
+
+    fun setCustomLineHeightSpanRenderer(spanRenderer: SpanRenderer) {
+        defaultSpanRenderers[LineHeight::class] = spanRenderer
+    }
+
+    fun setCustomQuoteSpanRenderer(spanRenderer: SpanRenderer) {
+        defaultSpanRenderers[Bullet::class] = spanRenderer
+    }
+
+    fun setCustomTabStopSpanRenderer(spanRenderer: SpanRenderer) {
+        defaultSpanRenderers[TabStop::class] = spanRenderer
+    }
+
     fun get(): TextCombineRenderer {
         return TextCombineRendererImpl(
             context = context,
@@ -92,6 +180,7 @@ class TextCombineRendererInstance private constructor(private val context: Conte
     }
 
     companion object {
+
         fun withContext(context: Context) = TextCombineRendererInstance(context = context)
     }
 }
