@@ -45,4 +45,5 @@ dependencies {
 
     testImplementation(libs.junit5.core)
     testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.mockito.inline)
 }

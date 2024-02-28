@@ -8,7 +8,7 @@ import eu.wilek.textcombine.renderer.TextCombineRendererImpl
 import eu.wilek.textcombine.renderer.span.SpanRenderer
 import kotlin.reflect.KClass
 
-internal class SpannableCreator(private val spanRenderers: MutableMap<KClass<out StyleSpan>, SpanRenderer>) {
+internal class SpannableCreator(private val spanRenderers: Map<KClass<out StyleSpan>, SpanRenderer>) {
 
     fun createSpan(
         context: Context,

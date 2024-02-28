@@ -165,7 +165,7 @@ class TextCombineRendererInstance private constructor(private val context: Conte
     }
 
     fun setCustomQuoteSpanRenderer(spanRenderer: SpanRenderer) {
-        defaultSpanRenderers[Bullet::class] = spanRenderer
+        defaultSpanRenderers[Quote::class] = spanRenderer
     }
 
     fun setCustomTabStopSpanRenderer(spanRenderer: SpanRenderer) {

@@ -3,7 +3,7 @@ androidGradlePlugin = "8.2.2"
 kotlin = "1.9.22"
 detekt = "1.23.5"
 
-mockito = "3.2.0"
+mockito = "4.0.0"
 junit5 = "5.10.0"
 
 [libraries]
@@ -15,6 +15,7 @@ androidx-appcompact-resources = { module = "androidx.appcompat:appcompat-resourc
 junit5-core = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit5" }
 junit5-engine-jupiter = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit5" }
 mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockito" }
+mockito-inline= { module = "org.mockito:mockito-inline", version.ref = "mockito" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
