@@ -266,7 +266,12 @@ class LeadingImageSpanBuilder {
 
     fun margin(builder: (@TextCombineDsl MarginBuilder).() -> Unit) {
         val marginBuilder = MarginBuilder().apply(builder)
-        margin = Margin(start = marginBuilder.start, top = marginBuilder.top, bottom = marginBuilder.bottom, end = marginBuilder.end)
+        margin = Margin(
+            start = marginBuilder.start,
+            top = marginBuilder.top,
+            bottom = marginBuilder.bottom,
+            end = marginBuilder.end
+        )
     }
 }
 
@@ -282,7 +287,12 @@ class ImageSpanBuilder {
 
     fun margin(builder: MarginBuilder.() -> Unit) {
         val marginBuilder = MarginBuilder().apply(builder)
-        margin = Margin(start = marginBuilder.start, top = marginBuilder.top, bottom = marginBuilder.bottom, end = marginBuilder.end)
+        margin = Margin(
+            start = marginBuilder.start,
+            top = marginBuilder.top,
+            bottom = marginBuilder.bottom,
+            end = marginBuilder.end
+        )
     }
 }
 

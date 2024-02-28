@@ -813,5 +813,4 @@ internal class TextCombineDSLBuilderTest {
             stringCombine
         )
     }
-
 }

@@ -8,7 +8,9 @@ import androidx.annotation.FontRes
 import androidx.core.content.res.ResourcesCompat
 import eu.wilek.textcombine.TextCombine.StyleSpan
 import eu.wilek.textcombine.TextCombine.StyleSpan.CharacterStyle.Typeface
-import eu.wilek.textcombine.TextCombine.TypefaceSource
+import eu.wilek.textcombine.TextCombine.TypefaceSource.FromAssets
+import eu.wilek.textcombine.TextCombine.TypefaceSource.FromFamilyName
+import eu.wilek.textcombine.TextCombine.TypefaceSource.FromResources
 import eu.wilek.textcombine.renderer.span.SpanRenderer
 
 internal class TypefaceSpanRenderer : SpanRenderer {
@@ -16,9 +18,9 @@ internal class TypefaceSpanRenderer : SpanRenderer {
     override fun renderSpan(context: Context, styleSpan: StyleSpan): Any {
         styleSpan as Typeface
         return when (val typeface = styleSpan.typeface) {
-            is TypefaceSource.FromAssets -> TypefaceSpan(typeface = context.getFontFromAsset(fileName = typeface.fileName))
-            is TypefaceSource.FromFamilyName -> FamilyNameTypefaceSpan(familyName = typeface.familyName)
-            is TypefaceSource.FromResources -> TypefaceSpan(typeface = context.getFontFromResources(fontResId = typeface.fontResId))
+            is FromAssets -> TypefaceSpan(typeface = context.getFontFromAsset(fileName = typeface.fileName))
+            is FromFamilyName -> FamilyNameTypefaceSpan(familyName = typeface.familyName)
+            is FromResources -> TypefaceSpan(typeface = context.getFontFromResources(fontResId = typeface.fontResId))
         }
     }
 
@@ -58,10 +60,14 @@ internal class TypefaceSpanRenderer : SpanRenderer {
                 paint.isFakeBoldText = true
             }
             if (fake and android.graphics.Typeface.ITALIC != 0) {
-                paint.textSkewX = -0.25f
+                paint.textSkewX = TEXT_SKEW_X
             }
 
             paint.setTypeface(styledTypeface)
+        }
+
+        private companion object {
+            const val TEXT_SKEW_X = -0.25f
         }
     }
 }
