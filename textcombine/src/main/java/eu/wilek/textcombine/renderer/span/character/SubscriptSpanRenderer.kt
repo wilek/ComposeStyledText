@@ -1,12 +1,13 @@
 package eu.wilek.textcombine.renderer.span.character
 
+import android.content.Context
 import android.text.style.SubscriptSpan
-import eu.wilek.textcombine.TextCombine.StyleSpan.CharacterStyle.Subscript
+import eu.wilek.textcombine.TextCombine.StyleSpan
 import eu.wilek.textcombine.renderer.span.SpanRenderer
 
-open class SubscriptSpanRenderer : SpanRenderer<Subscript> {
+internal class SubscriptSpanRenderer : SpanRenderer {
 
-    override fun renderSpan(styleSpan: Subscript): Any {
+    override fun renderSpan(context: Context, styleSpan: StyleSpan): Any {
         return SubscriptSpan()
     }
 }

@@ -6,13 +6,15 @@ import android.text.TextPaint
 import android.text.style.MetricAffectingSpan
 import androidx.annotation.FontRes
 import androidx.core.content.res.ResourcesCompat
+import eu.wilek.textcombine.TextCombine.StyleSpan
 import eu.wilek.textcombine.TextCombine.StyleSpan.CharacterStyle.Typeface
 import eu.wilek.textcombine.TextCombine.TypefaceSource
 import eu.wilek.textcombine.renderer.span.SpanRenderer
 
-open class TypefaceSpanRenderer(private val context: Context) : SpanRenderer<Typeface> {
+internal class TypefaceSpanRenderer : SpanRenderer {
 
-    override fun renderSpan(styleSpan: Typeface): Any {
+    override fun renderSpan(context: Context, styleSpan: StyleSpan): Any {
+        styleSpan as Typeface
         return when (val typeface = styleSpan.typeface) {
             is TypefaceSource.FromAssets -> TypefaceSpan(typeface = context.getFontFromAsset(fileName = typeface.fileName))
             is TypefaceSource.FromFamilyName -> FamilyNameTypefaceSpan(familyName = typeface.familyName)

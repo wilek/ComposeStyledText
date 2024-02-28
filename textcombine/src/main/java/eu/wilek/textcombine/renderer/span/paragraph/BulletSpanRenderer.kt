@@ -27,15 +27,17 @@ import android.text.style.LeadingMarginSpan
 import androidx.annotation.ColorInt
 import androidx.annotation.Px
 import eu.wilek.textcombine.TextCombine.DimensionValue
+import eu.wilek.textcombine.TextCombine.StyleSpan
 import eu.wilek.textcombine.TextCombine.StyleSpan.ParagraphStyle.Bullet
 import eu.wilek.textcombine.renderer.span.SpanRenderer
 import eu.wilek.textcombine.util.toColor
 import eu.wilek.textcombine.util.toPx
 import kotlin.math.roundToInt
 
-open class BulletSpanRenderer(private val context: Context) : SpanRenderer<Bullet> {
+internal class BulletSpanRenderer : SpanRenderer {
 
-    override fun renderSpan(styleSpan: Bullet): Any {
+    override fun renderSpan(context: Context, styleSpan: StyleSpan): Any {
+        styleSpan as Bullet
         return BulletPointSpan(
             gapWidth = (styleSpan.gapWidth ?: DEFAULT_GAP_WIDTH).toPx(context = context),
             bulletRadius = (styleSpan.radius ?: DEFAULT_BULLET_RADIUS).toPx(context = context),

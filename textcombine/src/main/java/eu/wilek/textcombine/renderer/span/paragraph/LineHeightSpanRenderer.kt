@@ -3,14 +3,16 @@ package eu.wilek.textcombine.renderer.span.paragraph
 import android.content.Context
 import android.graphics.Paint
 import androidx.annotation.Px
+import eu.wilek.textcombine.TextCombine.StyleSpan
 import eu.wilek.textcombine.TextCombine.StyleSpan.ParagraphStyle.LineHeight
 import eu.wilek.textcombine.renderer.span.SpanRenderer
 import eu.wilek.textcombine.util.toPx
 import kotlin.math.roundToInt
 
-open class LineHeightSpanRenderer(private val context: Context) : SpanRenderer<LineHeight> {
+internal class LineHeightSpanRenderer : SpanRenderer {
 
-    override fun renderSpan(styleSpan: LineHeight): Any {
+    override fun renderSpan(context: Context, styleSpan: StyleSpan): Any {
+        styleSpan as LineHeight
         return LineHeightSpan(height = styleSpan.height.toPx(context = context).roundToInt())
     }
 

@@ -1,15 +1,17 @@
 package eu.wilek.textcombine.renderer.span.character
 
+import android.content.Context
 import android.graphics.Typeface
-import android.text.style.StyleSpan
+import eu.wilek.textcombine.TextCombine.StyleSpan
 import eu.wilek.textcombine.TextCombine.StyleSpan.CharacterStyle.Style
 import eu.wilek.textcombine.TextCombine.TypefaceStyle
 import eu.wilek.textcombine.renderer.span.SpanRenderer
 
-open class StyleSpanRenderer : SpanRenderer<Style> {
+internal class StyleSpanRenderer : SpanRenderer {
 
-    override fun renderSpan(styleSpan: Style): Any {
-        return StyleSpan(styleSpan.typefaceStyle.toStyle())
+    override fun renderSpan(context: Context, styleSpan: StyleSpan): Any {
+        styleSpan as Style
+        return android.text.style.StyleSpan(styleSpan.typefaceStyle.toStyle())
     }
 
     private fun TypefaceStyle.toStyle() = when (this) {

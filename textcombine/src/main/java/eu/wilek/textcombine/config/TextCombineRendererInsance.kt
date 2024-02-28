@@ -1,9 +1,7 @@
-package eu.wilek.textcombine.renderer.spannable
+package eu.wilek.textcombine.config
 
 import android.content.Context
-import android.text.Spannable
-import android.text.SpannableString
-import eu.wilek.textcombine.TextCombine.StyleSpan
+import eu.wilek.textcombine.renderer.TextCombineRenderer
 import eu.wilek.textcombine.TextCombine.StyleSpan.CharacterStyle.AbsoluteSize
 import eu.wilek.textcombine.TextCombine.StyleSpan.CharacterStyle.BackgroundColor
 import eu.wilek.textcombine.TextCombine.StyleSpan.CharacterStyle.Clickable
@@ -27,7 +25,8 @@ import eu.wilek.textcombine.TextCombine.StyleSpan.ParagraphStyle.LineBackground
 import eu.wilek.textcombine.TextCombine.StyleSpan.ParagraphStyle.LineHeight
 import eu.wilek.textcombine.TextCombine.StyleSpan.ParagraphStyle.Quote
 import eu.wilek.textcombine.TextCombine.StyleSpan.ParagraphStyle.TabStop
-import eu.wilek.textcombine.renderer.TextCombineRenderer
+import eu.wilek.textcombine.renderer.TextCombineRendererImpl
+import eu.wilek.textcombine.renderer.span.SpanRenderer
 import eu.wilek.textcombine.renderer.span.character.AbsoluteSizeSpanRenderer
 import eu.wilek.textcombine.renderer.span.character.BackgroundColorSpanRenderer
 import eu.wilek.textcombine.renderer.span.character.ClickableSpanRenderer
@@ -51,62 +50,48 @@ import eu.wilek.textcombine.renderer.span.paragraph.LineBackgroundSpanRenderer
 import eu.wilek.textcombine.renderer.span.paragraph.LineHeightSpanRenderer
 import eu.wilek.textcombine.renderer.span.paragraph.QuoteSpanRenderer
 import eu.wilek.textcombine.renderer.span.paragraph.TabStopSpanRenderer
+import eu.wilek.textcombine.renderer.spannable.SpannableCreator
 
-class DefaultSpannableCreator : SpannableCreator {
+class TextCombineRendererInstance private constructor(private val context: Context) {
 
-    override fun createSpan(
-        context: Context,
-        text: CharSequence,
-        textSpans: List<TextCombineRenderer.PhraseSpan>
-    ): CharSequence {
-        val spannable = SpannableString(text)
+    private val defaultSpanRenderers = mutableMapOf(
+        AbsoluteSize::class to AbsoluteSizeSpanRenderer(),
+        BackgroundColor::class to BackgroundColorSpanRenderer(),
+        Clickable::class to ClickableSpanRenderer(),
+        ForegroundColor::class to ForegroundColorSpanRenderer(),
+        Image::class to ImageSpanRenderer(),
+        MaskFilter::class to MaskFilterSpanRenderer(),
+        RelativeSize::class to RelativeSizeSpanRenderer(),
+        ScaleX::class to ScaleXSpanRenderer(),
+        Strikethrough::class to StrikethroughSpanRenderer(),
+        Style::class to StyleSpanRenderer(),
+        Subscript::class to SubscriptSpanRenderer(),
+        Superscript::class to SuperscriptSpanRenderer(),
+        TextAppearance::class to TextAppearanceSpanRenderer(),
+        Typeface::class to TypefaceSpanRenderer(),
+        Underline::class to UnderlineSpanRenderer(),
+        Alignment::class to AlignmentSpanRenderer(),
+        Bullet::class to BulletSpanRenderer(),
+        LeadingImage::class to LeadingImageSpanRenderer(),
+        LeadingMargin::class to LeadingMarginSpanRenderer(),
+        LineBackground::class to LineBackgroundSpanRenderer(),
+        LineHeight::class to LineHeightSpanRenderer(),
+        Quote::class to QuoteSpanRenderer(),
+        TabStop::class to TabStopSpanRenderer()
+    )
 
-        textSpans.forEach { textSpan ->
-            textSpan.spans.forEach { span ->
-                spannable.setSpan(
-                    span.resolve(context = context),
-                    textSpan.start,
-                    textSpan.end,
-                    Spannable.SPAN_INCLUSIVE_EXCLUSIVE
-                )
-            }
-        }
-
-
-        return spannable
+    fun setCustomAbsoluteSizeSpanRenderer(spanRenderer: SpanRenderer) {
+        defaultSpanRenderers[AbsoluteSize::class] = spanRenderer
     }
 
-    private fun StyleSpan.resolve(context: Context) = when (this) {
-        is StyleSpan.CharacterStyle -> resolve(context = context)
-        is StyleSpan.ParagraphStyle -> resolve(context = context)
+    fun get(): TextCombineRenderer {
+        return TextCombineRendererImpl(
+            context = context,
+            spanCreator = SpannableCreator(spanRenderers = defaultSpanRenderers)
+        )
     }
 
-    private fun StyleSpan.CharacterStyle.resolve(context: Context) = when (this) {
-        is AbsoluteSize -> AbsoluteSizeSpanRenderer(context = context).renderSpan(styleSpan = this)
-        is BackgroundColor -> BackgroundColorSpanRenderer(context = context).renderSpan(styleSpan = this)
-        is Clickable -> ClickableSpanRenderer().renderSpan(styleSpan = this)
-        is ForegroundColor -> ForegroundColorSpanRenderer(context = context).renderSpan(styleSpan = this)
-        is Image -> ImageSpanRenderer(context = context).renderSpan(styleSpan = this)
-        is MaskFilter -> MaskFilterSpanRenderer().renderSpan(styleSpan = this)
-        is RelativeSize -> RelativeSizeSpanRenderer().renderSpan(styleSpan = this)
-        is ScaleX -> ScaleXSpanRenderer().renderSpan(styleSpan = this)
-        is Strikethrough -> StrikethroughSpanRenderer().renderSpan(styleSpan = this)
-        is Style -> StyleSpanRenderer().renderSpan(styleSpan = this)
-        is Subscript -> SubscriptSpanRenderer().renderSpan(styleSpan = this)
-        is Superscript -> SuperscriptSpanRenderer().renderSpan(styleSpan = this)
-        is TextAppearance -> TextAppearanceSpanRenderer(context = context).renderSpan(styleSpan = this)
-        is Typeface -> TypefaceSpanRenderer(context = context).renderSpan(styleSpan = this)
-        is Underline -> UnderlineSpanRenderer().renderSpan(styleSpan = this)
-    }
-
-    private fun StyleSpan.ParagraphStyle.resolve(context: Context) = when (this) {
-        is Alignment -> AlignmentSpanRenderer().renderSpan(styleSpan = this)
-        is Bullet -> BulletSpanRenderer(context = context).renderSpan(styleSpan = this)
-        is LeadingImage -> LeadingImageSpanRenderer(context = context).renderSpan(styleSpan = this)
-        is LeadingMargin -> LeadingMarginSpanRenderer(context = context).renderSpan(styleSpan = this)
-        is LineBackground -> LineBackgroundSpanRenderer(context = context).renderSpan(styleSpan = this)
-        is LineHeight -> LineHeightSpanRenderer(context = context).renderSpan(styleSpan = this)
-        is Quote -> QuoteSpanRenderer(context = context).renderSpan(styleSpan = this)
-        is TabStop -> TabStopSpanRenderer(context = context).renderSpan(styleSpan = this)
+    companion object {
+        fun withContext(context: Context) = TextCombineRendererInstance(context = context)
     }
 }

@@ -23,12 +23,12 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.willReturn
 
-internal class TextCombineRendererTest {
+internal class TextCombineRendererImplTest {
 
     private val resourcesMock: Resources = mock()
     private val context: Context = mock { on { resources } doAnswer { resourcesMock } }
     private val spanCreator: SpannableCreator = mock()
-    private val textCombineRenderer = TextCombineRenderer(context = context, spanCreator = spanCreator)
+    private val textCombineRenderer = TextCombineRendererImpl(context = context, spanCreator = spanCreator)
 
     @BeforeEach
     fun setUp() {
@@ -259,7 +259,7 @@ internal class TextCombineRendererTest {
             context = context,
             text = "Paragraph one",
             textSpans = listOf(
-                TextCombineRenderer.PhraseSpan(
+                TextCombineRendererImpl.PhraseSpan(
                     start = 0,
                     end = 13,
                     spans = listOf(Quote())
@@ -295,8 +295,8 @@ internal class TextCombineRendererTest {
             context = context,
             text = "Paragraph one\nParagraph two",
             textSpans = listOf(
-                TextCombineRenderer.PhraseSpan(start = 0, end = 13, spans = listOf(Quote())),
-                TextCombineRenderer.PhraseSpan(start = 14, end = 27, spans = listOf(Quote()))
+                TextCombineRendererImpl.PhraseSpan(start = 0, end = 13, spans = listOf(Quote())),
+                TextCombineRendererImpl.PhraseSpan(start = 14, end = 27, spans = listOf(Quote()))
             )
         )
     }
@@ -334,13 +334,13 @@ internal class TextCombineRendererTest {
             context = context,
             text = "Paragraph one\nParagraph two",
             textSpans = listOf(
-                TextCombineRenderer.PhraseSpan(start = 0, end = 13, spans = listOf(Quote())),
-                TextCombineRenderer.PhraseSpan(
+                TextCombineRendererImpl.PhraseSpan(start = 0, end = 13, spans = listOf(Quote())),
+                TextCombineRendererImpl.PhraseSpan(
                     start = 10,
                     end = 13,
                     spans = listOf(Underline)
                 ),
-                TextCombineRenderer.PhraseSpan(start = 14, end = 27, spans = listOf(Quote()))
+                TextCombineRendererImpl.PhraseSpan(start = 14, end = 27, spans = listOf(Quote()))
             )
         )
     }
@@ -361,7 +361,7 @@ internal class TextCombineRendererTest {
             context = context,
             text = "Paragraph one",
             textSpans = listOf(
-                TextCombineRenderer.PhraseSpan(
+                TextCombineRendererImpl.PhraseSpan(
                     start = 0,
                     end = 13,
                     spans = listOf(Quote())
@@ -391,12 +391,12 @@ internal class TextCombineRendererTest {
             context = context,
             text = "Paragraph one",
             textSpans = listOf(
-                TextCombineRenderer.PhraseSpan(
+                TextCombineRendererImpl.PhraseSpan(
                     start = 0,
                     end = 13,
                     spans = listOf(Quote())
                 ),
-                TextCombineRenderer.PhraseSpan(
+                TextCombineRendererImpl.PhraseSpan(
                     start = 0,
                     end = 13,
                     spans = listOf(Underline)

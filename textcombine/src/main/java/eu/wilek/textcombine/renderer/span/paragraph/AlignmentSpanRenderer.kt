@@ -1,14 +1,17 @@
 package eu.wilek.textcombine.renderer.span.paragraph
 
+import android.content.Context
 import android.text.Layout
 import android.text.style.AlignmentSpan
+import eu.wilek.textcombine.TextCombine.StyleSpan
 import eu.wilek.textcombine.TextCombine.StyleSpan.ParagraphStyle.Alignment
 import eu.wilek.textcombine.TextCombine.TextAlignmentType
 import eu.wilek.textcombine.renderer.span.SpanRenderer
 
-open class AlignmentSpanRenderer : SpanRenderer<Alignment> {
+internal class AlignmentSpanRenderer : SpanRenderer {
 
-    override fun renderSpan(styleSpan: Alignment): Any {
+    override fun renderSpan(context: Context, styleSpan: StyleSpan): Any {
+        styleSpan as Alignment
         return AlignmentSpan.Standard(styleSpan.alignment.toAlignment())
     }
 

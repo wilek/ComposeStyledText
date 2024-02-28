@@ -7,15 +7,15 @@ import android.graphics.drawable.Drawable
 import android.text.style.ReplacementSpan
 import androidx.annotation.IntRange
 import eu.wilek.textcombine.TextCombine.ImageAlignType
+import eu.wilek.textcombine.TextCombine.StyleSpan
 import eu.wilek.textcombine.TextCombine.StyleSpan.CharacterStyle.Image
 import eu.wilek.textcombine.renderer.span.SpanRenderer
 import eu.wilek.textcombine.util.toImage
 
-open class ImageSpanRenderer(private val context: Context) : SpanRenderer<Image> {
+internal class ImageSpanRenderer : SpanRenderer {
 
-    override fun renderSpan(
-        styleSpan: Image
-    ): Any {
+    override fun renderSpan(context: Context, styleSpan: StyleSpan): Any {
+        styleSpan as Image
         return ImageSpan(
             drawable = styleSpan.image.toImage(context = context, size = styleSpan.size, margin = styleSpan.margin),
             alignment = styleSpan.alignType

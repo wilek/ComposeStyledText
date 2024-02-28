@@ -1,12 +1,13 @@
 package eu.wilek.textcombine.renderer.span.character
 
+import android.content.Context
 import android.text.style.StrikethroughSpan
-import eu.wilek.textcombine.TextCombine.StyleSpan.CharacterStyle.Strikethrough
+import eu.wilek.textcombine.TextCombine.StyleSpan
 import eu.wilek.textcombine.renderer.span.SpanRenderer
 
-open class StrikethroughSpanRenderer : SpanRenderer<Strikethrough> {
+internal class StrikethroughSpanRenderer : SpanRenderer {
 
-    override fun renderSpan(styleSpan: Strikethrough): Any {
+    override fun renderSpan(context: Context, styleSpan: StyleSpan): Any {
         return StrikethroughSpan()
     }
 }

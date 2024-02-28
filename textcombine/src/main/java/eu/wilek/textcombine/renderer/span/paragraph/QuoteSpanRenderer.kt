@@ -9,15 +9,17 @@ import android.text.style.LeadingMarginSpan
 import androidx.annotation.ColorInt
 import androidx.annotation.Px
 import eu.wilek.textcombine.TextCombine
+import eu.wilek.textcombine.TextCombine.StyleSpan
 import eu.wilek.textcombine.TextCombine.StyleSpan.ParagraphStyle.Quote
 import eu.wilek.textcombine.renderer.span.SpanRenderer
 import eu.wilek.textcombine.util.toColor
 import eu.wilek.textcombine.util.toPx
 import kotlin.math.roundToInt
 
-open class QuoteSpanRenderer(private val context: Context) : SpanRenderer<Quote> {
+internal class QuoteSpanRenderer : SpanRenderer {
 
-    override fun renderSpan(styleSpan: Quote): Any {
+    override fun renderSpan(context: Context, styleSpan: StyleSpan): Any {
+        styleSpan as Quote
         return QuoteSpan(
             gapWidth = (styleSpan.gapWidth ?: DEFAULT_GAP_WIDTH).toPx(context = context),
             stripeWidth = (styleSpan.stripeWidth ?: DEFAULT_STRIPE_WIDTH).toPx(context = context),

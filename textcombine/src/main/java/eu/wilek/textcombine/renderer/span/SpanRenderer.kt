@@ -1,8 +1,9 @@
 package eu.wilek.textcombine.renderer.span
 
-import eu.wilek.textcombine.TextCombine
+import android.content.Context
+import eu.wilek.textcombine.TextCombine.StyleSpan
 
-interface SpanRenderer<T : TextCombine.StyleSpan> {
+interface SpanRenderer {
 
-    fun renderSpan(styleSpan: T): Any
+    fun renderSpan(context: Context, styleSpan: StyleSpan): Any
 }

@@ -5,13 +5,15 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import androidx.annotation.ColorInt
 import androidx.annotation.Px
+import eu.wilek.textcombine.TextCombine.StyleSpan
 import eu.wilek.textcombine.TextCombine.StyleSpan.ParagraphStyle.LineBackground
 import eu.wilek.textcombine.renderer.span.SpanRenderer
 import eu.wilek.textcombine.util.toColor
 
-open class LineBackgroundSpanRenderer(private val context: Context) : SpanRenderer<LineBackground> {
+internal class LineBackgroundSpanRenderer : SpanRenderer {
 
-    override fun renderSpan(styleSpan: LineBackground): Any {
+    override fun renderSpan(context: Context, styleSpan: StyleSpan): Any {
+        styleSpan as LineBackground
         return LineBackgroundSpan(styleSpan.color.toColor(context = context))
     }
 

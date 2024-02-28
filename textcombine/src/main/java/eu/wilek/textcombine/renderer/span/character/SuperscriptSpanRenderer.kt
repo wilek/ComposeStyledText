@@ -1,12 +1,13 @@
 package eu.wilek.textcombine.renderer.span.character
 
+import android.content.Context
 import android.text.style.SuperscriptSpan
-import eu.wilek.textcombine.TextCombine.StyleSpan.CharacterStyle.Superscript
+import eu.wilek.textcombine.TextCombine.StyleSpan
 import eu.wilek.textcombine.renderer.span.SpanRenderer
 
-open class SuperscriptSpanRenderer : SpanRenderer<Superscript> {
+internal class SuperscriptSpanRenderer : SpanRenderer {
 
-    override fun renderSpan(styleSpan: Superscript): Any {
+    override fun renderSpan(context: Context, styleSpan: StyleSpan): Any {
         return SuperscriptSpan()
     }
 }
