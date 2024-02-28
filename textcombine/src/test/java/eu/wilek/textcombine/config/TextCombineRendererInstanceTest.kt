@@ -33,7 +33,6 @@ import org.mockito.Mockito.mockConstruction
 import org.mockito.kotlin.mock
 import kotlin.reflect.KClass
 
-
 internal class TextCombineRendererInstanceTest {
 
     private val context: Context = mock()
