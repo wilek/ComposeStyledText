@@ -57,6 +57,18 @@ import eu.wilek.textcombine.TextCombine.TypefaceStyle
 )
 annotation class TextCombineDsl
 
+fun stringCombine(text: String) = stringCombine {
+    appendString(text = text)
+}
+
+fun stringCombine(@StringRes stringResId: Int) = stringCombine {
+    appendStringResource(stringResId = stringResId)
+}
+
+fun stringCombine(@PluralsRes pluralResId: Int, count: Int) = stringCombine {
+    appendStringPluralResource(pluralResId = pluralResId, count = count)
+}
+
 @TextCombineDsl
 fun stringCombine(builder: (@TextCombineDsl StringCombineBuilder).() -> Unit): TextCombine {
     return StringCombineBuilder().apply(builder).build()

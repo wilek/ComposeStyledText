@@ -45,4 +45,9 @@ android {
 
 dependencies {
     implementation(project(":textcombine"))
+
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.appcompact)
+    implementation(libs.androidx.lifecycle.viewmodel)
+    implementation(libs.androidx.recyclerview)
 }

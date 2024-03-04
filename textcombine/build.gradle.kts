@@ -38,6 +38,7 @@ tasks.withType<Test> {
 }
 
 dependencies {
+
     implementation(libs.androidx.annotation)
     implementation(libs.androidx.appcompact.resources)
 

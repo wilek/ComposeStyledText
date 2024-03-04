@@ -5,4 +5,38 @@
     <string name="replacement_two">dummy</string>
     <string name="replacement_three">printing</string>
     <string name="replacement_four">typesetting</string>
+
+    <!--Table content-->
+    <string name="table_of_content_header_text_creating">Text creating</string>
+    <string name="table_of_content_header_paragraph_spans">Applying paragraph spans</string>
+    <string name="table_of_content_header_character_spans">Applying character spans</string>
+
+    <string name="table_of_content_title_creating_text_example">Example of creating texts</string>
+    <string name="table_of_content_title_alignment">Alignment span</string>
+    <string name="table_of_content_title_bullet">Bullet span</string>
+    <string name="table_of_content_title_leading_image">Image span</string>
+    <string name="table_of_content_title_leading_margin">Leading margin span</string>
+    <string name="table_of_content_title_line_background">Line background span</string>
+    <string name="table_of_content_title_line_height">Line height span</string>
+    <string name="table_of_content_title_quote">Quote span</string>
+    <string name="table_of_content_title_tab_stop">Tab stop span</string>
+    <string name="table_of_content_title_absolute_size">Absolute size span</string>
+    <string name="table_of_content_title_background_color">Background color span</string>
+    <string name="table_of_content_title_clickable">Clickable span</string>
+    <string name="table_of_content_title_foreground_color">Foreground color span</string>
+    <string name="table_of_content_title_image">Image span</string>
+    <string name="table_of_content_title_mask_filter">Mask filter span</string>
+    <string name="table_of_content_title_relative_size">Relative size span</string>
+    <string name="table_of_content_title_scale_x_span">ScaleX span</string>
+    <string name="table_of_content_title_strikethrough_span">Strikethrough span</string>
+    <string name="table_of_content_title_style_span">Style span</string>
+    <string name="table_of_content_title_subscript_span">Subscript span</string>
+    <string name="table_of_content_title_superscript_span">Superscript span</string>
+    <string name="table_of_content_title_text_appearance_span">Text appearance span</string>
+    <string name="table_of_content_title_typeface_span">Typeface span</string>
+    <string name="table_of_content_title_underline_span">Underline span</string>
+
+
+
+
 </resources>
